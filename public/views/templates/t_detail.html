@@ -1,0 +1,295 @@
+<!--MAIN ============================================================-->
+<script id='mainbT' type='text/ractive'>
+
+<div class="row">
+
+    <div class="small-12 column gapbot">
+    <div class="headerTitle">
+           <div class="small-12 medium-8 column collapse"> {{title}}  </div>
+          <div class="small-12 medium-4 column">
+          <div id="" class=" btAct blue right gaptop" on-click="submit">Regresar a {{list}}</div>
+          </div>
+    </div>
+    </div>
+
+
+    {{#each model:num}}  
+      
+      {{#if this.group!=undefined}}   
+        <div class="small-12 column gaptop2 gapbot2 separatorDetail">{{this.group}}</div>
+      {{/if}}
+
+      {{#if this.visible==undefined}}
+
+      <div class="small-12 medium-6 large-6 column gapbot2">
+        <div class="small-12 column">
+
+          <div class="label">{{this.aliasN}}</div>
+          {{#if this.required}}<div class="requiredCont">*</div>{{/if}}
+          <!-- POP INFO -->
+          {{#if this.popInfo!=undefined}}
+          <div  id="pop_{{@key}}" title="{{popInfo}}" class="popInfoCont">?</div>
+          {{/if}}
+        </div>
+        <div class="small-12 column">
+          {{#if this.ctrl=="String"}} {{>stringT}} {{/if}}
+          {{#if this.ctrl=="Placa"}} {{>placaT}} {{/if}}
+          {{#if this.ctrl=="StringUpper"}} {{>stringUpperT}} {{/if}}
+          {{#if this.ctrl=="PhoneMex"}} {{>phonemexT}} {{/if}}
+          {{#if this.ctrl=="Number"}} {{>numberT}} {{/if}}
+          {{#if this.ctrl=="Date"}}   {{>dateT}}   {{/if}}
+          {{#if this.ctrl=="Tree"}}   {{>treeT}}   {{/if}}
+          {{#if this.ctrl=="Extras"}}   {{>extrasT}}   {{/if}}
+          {{#if this.ctrl=="Year"}}   {{>yearT}}   {{/if}}
+          {{#if this.ctrl=="Moneda"}}   {{>monedaT}}   {{/if}}
+          {{#if this.ctrl=="Slider"}}   {{>sliderT}}   {{/if}}
+          {{#if this.ctrl=="Combo"}}   {{>comboT}}   {{/if}}
+          {{#if this.ctrl=="Addr"}}   {{>addrT}}   {{/if}}
+        </div>
+      
+        <div class="small-12 column err " id="err_{{@key}}"></div>
+      </div>
+      {{/if}}
+
+
+      
+    {{/each}}
+
+
+    <div class="small-12 column align-center">
+      <div id="btSave" class="btGuardar green" on-click="submit">Guardar</div>
+    </div>
+
+
+</div>
+
+</script>
+
+
+<!--STRING ============================================================-->
+<script id='stringT' type='text/ractive'>
+
+  <input class="finput"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+<!--STRING UPPER  ============================================================-->
+<script id='stringUpperT' type='text/ractive'>
+  <input class="finput" data-inputmask=" 'mask': 'A', 'repeat':100,'greedy':false"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--PLACA  ============================================================-->
+<script id='placaT' type='text/ractive'>
+  <input class="finput" data-inputmask=" 'mask': 'B', 'repeat':9,'greedy':false"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+</script>
+
+
+<!--PHONE MEXICO  ============================================================-->
+<script id='phonemexT' type='text/ractive'>
+  <input class="finput phoneMex"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--NUMBER ============================================================-->
+<script id='numberT' type='text/ractive'>
+
+  <input class="finput" on-keyup="dataChange" on-blur="blur" type="number" name="" value="{{data[@key]}}">
+
+</script>
+
+<!--DATE ============================================================-->
+<script id='yearT' type='text/ractive'>
+
+  <input class="finput" data-inputmask="'alias': 'numeric', 'mask': '9999', 'placeholder': '_', 'rightAlign': false"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--DATE ============================================================-->
+<script id='monedaT' type='text/ractive'>
+
+  <input class="finput"  data-inputmask="'alias': 'numeric', 'rightAlign': false, 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'autoUnmask': true, 'placeholder': '0'" on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+<!--YEAR ============================================================-->
+<script id='dateT' type='text/ractive'>
+
+  <input class="finput"  on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--TREE ============================================================-->
+<script id='treeT' type='text/ractive'>
+  <div class="treeTit">{{data.path}}</div>
+ <div class="tree" id="tree"></div>
+
+</script>
+
+
+<!--DATE ============================================================-->
+<script id='yearT' type='text/ractive'>
+
+  <input class="finput" on-keyup="dataChange" on-blur="blur" type="number" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--COMBO ============================================================-->
+<script id='comboT' type='text/ractive'>
+
+ <select id="combo_{{@key}}"  >
+   
+ </select>
+
+</script>
+
+<!--Check ============================================================-->
+<script id='checkT' type='text/ractive'>
+
+    <input id="check{{id}}" type="checkbox"  checked='{{data[@key]}}'>
+    <label for="t{{id}}">{{desc}} </label>
+    
+</script>
+
+
+<!-- OPtions ============================================================-->
+<script id='radioT' type='text/ractive'>
+
+{{#each options:op}}
+   
+    <input id=key{{op}}" type="radio" on-click="optionSet" name="{{data[key]}}" value="{{val}}">
+    <label for="key{{op}}">{{text}} </label>
+          
+{{/each}}
+    
+</script>
+
+
+
+<!--ADDR Dirección Completa =================================================-->
+<script id='addrT' type='text/ractive'>
+
+
+{{#each data[@key]}}
+    <div class="small-12 medium-12 column gapbot addrBox">
+
+       <div id="del_{{id}}" class="deleteDetCont gapbot"  > <!-- hidden -->
+            <img class="delIco" src="/img/wasteB.png" on-tap="deleteAddr">
+        </div>
+
+
+        <div class="small-12 medium-12 large-6 column"><img src="{{url}}"></div>
+        <div class="small-12 medium-12 large-5 column gaptop">{{formatAddr}}
+          {{#if interior!=undefined}}
+          <br>
+          Interior : {{interior}}
+          {{/if}}
+        </div>
+
+
+    </div>
+
+{{/each}}
+
+<div id="mapCtrl_{{@key}}" class="mapCtrlDiv">
+
+{{#if data[@key].length < limit}}
+ <div id="" class=" btAct blue right gaptop gapbot" on-click="addAddr">Agregar Dirección  <img src="/img/map.png"> </div>
+{{/if}}
+</div>
+
+</script>
+
+
+
+
+
+
+
+<!--PORCENTAJE ============================================================-->
+<script id='sliderT' type='text/ractive'>
+
+<div data-min="0" id="perc_{{key}}" data-start="{{default}}" data-value="{{data[@key]}}" data-step="{{step}}" data-rac="{{@key}}" data-max="{{max}}" data-min="{{min}}" data-slider="" class="sliders small-12 column"  ></div>
+
+ <input  style="padding-top:5px;" data-inputmask="'alias': 'numeric', 'min':0, 'rightAlign': false,  'autoGroup': true,  'autoUnmask': true, 'placeholder': '', 'suffix': ' {{suffix}}'"
+ class="finput" disabled max="{{max}}" min={{min}} id="valPerc_{{@key}}" on-keyup="dataChange" on-blur="blur"  name="" value="{{data[@key]}}">
+
+
+</script>
+
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='mapaT' type='text/ractive'>
+<canvas id="canvas" style="display:none;">
+</canvas>
+<img  id="output" style="display:none;" />
+<div id="mapa">
+    <div class="mapRow">
+
+
+         <div class="closeModal gaptop" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+        <div class="small-12 medium-12  column">
+            <div class="small-12 column  collapse">
+                <input class="pac-input" id="pac-input_{{id}}" type="text" placeholder="Escribe tu dirección" />
+            </div>
+            <div class="ubica" id="ubica_{{id}}"></div>
+        </div>
+
+        {{#if data.place_id!=undefined}}
+        <div class="small-12 medium-12  column">
+            <label class="gapbot">Dirección</label>
+            <div class="small-12 medium-12 large-12 column gapbot textMap">{{data.formatAddr}}</div>
+            <br>
+            <label class="gapbot">Coordenadas</label>
+            <div class="small-12 medium-12 large-12 column gapbot textMap">{{data.coords[0]}}, {{data.coords[1]}}</div>
+           
+        </div>
+
+        <div class="small-12 column gapbot"><div class="label">Número interior</div>
+         <input class="finput" id="interiorMapa" type="text" name="" value="{{data.interior}}">
+
+
+         <div class="small-12 medium-12 large-12 gapbot2 gaptop2 column">
+                <div id="" class=" btAct blue right  " id="addrSave" on-click="saveAddr">Agregar Dirección <img src="/img/map.png"> </div>
+            </div>
+          {{/if}}
+    </div>
+
+</div>
+</script>
+
+
+<!--  DELETE POP UP -->
+
+<script id='deleteT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">{{desc}}</div>
+    <div class="botCont">
+        <div on-tap="confirm" class="btAct green">Sí</div>
+        <div on-tap="cancel" class="btAct blue">No</div>
+
+    </div>
+</div>
+
+</script>
+
+
+
+<!--  POP UP -->
+
+<script id='popT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">{{desc}}</div> 
+</div>
+
+</script>

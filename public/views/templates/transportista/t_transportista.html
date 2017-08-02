@@ -1,0 +1,216 @@
+
+<!-- SIGNUP T ============================================================-->
+
+
+<script id='mainT' type='text/ractive'>
+
+    <div class="flexbox-item fill-area content flexbox-item-grow">
+    <div class="leftArea">
+    <div id="logoArea">
+      <img src="img/logo_cliomedic.png">
+    </div>
+    <div id="menuArea"></div>
+     </div>
+        <div class="fill-area-content flexbox-item-grow">
+        <!-- header -->
+          <div id="headerDiv" class="flexbox-item header">
+          </div>
+          <div id="contentArea"></div>
+        </div>
+    </div>
+
+</script>
+
+<script id='resumenT' type='text/ractive'>
+    <div id="menuCont">
+      <h5>Resumen</h5>
+    </div>   
+</script>
+
+<script id='menuT' type='text/ractive'>
+
+        <div id="menuCont">
+        {{#each items:num}}
+            <div id="menuItem_{{id}}"  on-click="toogle" class="menuItem">
+              <div class="menuIco"><img src="img/{{ico}}"></div>
+              <div class="menuText">{{name}}</div>
+              {{#if items[num].childs.length>0}}
+                 <div class="moreIco"><img id="icof_{{id}}" src="img/flecha0.png"></div>
+              {{/if}}
+             
+            </div>
+            <div id="childs_{{id}}" class="childsCont {{#if !items[num].toogle}}hide{{/if}}">
+            {{#each childs}}
+                <div on-click="toogle" class="subItem ">
+                  <div class="menuIco"><img src="img/{{ico}}"></div>
+                  <div class="subText">{{name}}</div>
+                </div>
+            {{/each}}
+            </div>
+
+        {{/each}}
+        </div>   
+
+
+
+</script>
+
+<!--Agrega tabs-->
+<script id='tabsT' type='text/ractive'>
+     <div class="tabs">
+        <div id="tabsBt">
+        {{#each tabs}}
+            <div id="tabItem_{{id}}" on-click="clickTab" class="tabItem"><div class="tabText">{{name}}</div><div on-click="removeTab" class="closeTabIco">x</div></div>
+        {{/each}}
+        </div>   
+
+        <div id="tabsContent">
+        {{#each tabs}}
+            <div class="tabContItem" id="tabContItem_{{id}}">{{{html}}}</div>
+        {{/each}}
+        </div>
+    </div>
+</script>
+
+
+<!--Agrega submenu tabs-->
+<script id='subtabsT' type='text/ractive'>
+     <div class="subtabs">
+        <div id="subtabsBt">
+        {{#each tabs}}
+            <div id="subtabItem_{{id}}" on-click="clickTab" class="subtabItem"><div class="subtabText">{{name}}</div></div>
+        {{/each}}
+        </div>   
+    </div>
+</script>
+
+<!--Agrega links Expediente-->
+<script id='submenuT' type='text/ractive'>
+     <div class="subtabs">
+        <div id="subtabsBt">
+        {{#each subms}}
+            <div id="subsubItem_{{id}}" on-click="clickSub" class="subsubItem"><div class="subsubText">{{name}}</div></div>
+        {{/each}}
+        </div>   
+
+        <div id="subsubsContent">
+        {{#each subms}}
+            <div class="subsubContItem" id="subsubContItem_{{id}}">{{{html}}}</div>
+        {{/each}}
+        </div>
+    </div>
+</script>
+
+
+    <!--  header
+    ====================================================-->
+<script id='headerT' type='text/ractive'>
+
+        <div id="searchBar">
+          <div id="icoLupa"><img src="img/lupa32.png"></div>
+          <input type="text" class="searchInput" />
+        </div>
+
+        <div id="notBar" class="secMenu">
+          <div id="useroptions_{{_id}}" class="notifications">
+             <div id="icoMsg"><img src="img/msg32.png"></div>
+             <div class="numInd" id="numMsg">2</div>
+          </div>
+        <div class="hidden"> 
+            <div class="opt">
+                <div class="menuOpt" on-click="profile">Mensaje de Laura Romero | Asistente</div>
+              <hr>
+              <div class="menuOpt" on-click="logout">Mensaje de Doctor Morales | Dr</div>
+             
+              
+            </div>
+        </div>
+
+        </div>
+
+        <div id="notBar" class="secMenu">
+        <div id="useroptions_{{_id}}" class="messages">
+           <div id="icoMsg"><img src="img/not32.png"></div>
+           <div class="numInd" id="numMsg">2</div>
+        </div>
+        <div class="hidden"> 
+            <div class="opt">
+                   <div class="menuOpt" on-click="useroptions">Solicitud de Paciente | Compartir Expediente</div>
+              <hr>
+              <div class="menuOpt" on-click="logout">2 Citas próximas</div>
+              
+            </div>
+
+        </div>
+         </div>
+
+        <div id="notBar" class="secMenu">
+          <div class="profileIco "></div>
+          <div id="useroptions_{{_id}}" class="baseoptions"><div id="icoNot"><img src="img/flecha1.png"></div></div>
+        <div class="hidden"> 
+            <div class="opt">
+              <div class="" >{{cCase(data.nombre)}} {{cCase(data.paterno)}} </div>
+              <hr>
+              <div class="menuOpt" on-click="profile">Configuración Perfil</div>
+              <div class="menuOpt" on-click="closeSession">Cerrar Sesión</div>
+              
+            </div>
+        </div>
+       
+
+
+
+</script>
+
+
+    <!--  DELETE NODE CONFIRMATION MODAL ====================================================-->
+  <script id='deleteNT' type='text/ractive'>
+    
+       <div id="delModal" class="hidden modal">
+        <div id="modalTitle">{{msg}}</div>
+        <div class="nodeName" id="nodeName_{{_id}}">{{nodeName}}</div>
+
+        <input on-enter="confirm"  class="deleteInput" id="itemName_{{_id}}" type="text">
+
+
+         <div class="">
+        <button on-click="cancel" class="bt small b_dark ">Cancelar</button>
+        <button id="delete_{{_id}}" on-click="confirm" class="bt small b_dark mainAction" disabled>Aceptar</button>
+        </div>
+        
+       
+
+            </div>
+  </script>
+
+
+      <!--  DELETE NODE CONFIRMATION MODAL ====================================================-->
+  <script id='avisoT' type='text/ractive'>
+    
+       <div id="delModal" class="hidden modal">
+        <div id="modalTitle">{{msg}}</div>
+        <div class="modalText" id="">{{nodeName}}</div>
+
+         <div class="small-12">
+         {{#each options}}
+            <button on-click="{{listener}}" class="btG {{cls}} spaceBt ">{{txt}}</button>
+        {{/each}}
+        </div>
+        
+       
+
+            </div>
+  </script>
+
+
+ <!--  MEDIC PROFILE ====================================================-->
+  <script id='profileT' type='text/ractive'>
+    
+    <div id="profileContent">
+        
+    </div>
+    <div id="subContent">
+        </div>
+    
+    
+  </script>

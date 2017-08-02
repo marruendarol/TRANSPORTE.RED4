@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>transporte.red | Administración</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /
+    <meta name="description" CONTENT="">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="transporte.red">
+
+      <!--FAV -->
+    <link rel="icon" type="image/png" href="/img/fav.png" />
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+    <link rel="stylesheet" href="/css/dhtmlxcombo.css"/>
+
+      <meta name="google-signin-client_id" content="485665433046-3v6hok8sfeu0th312tcllsb24apabvld.apps.googleusercontent.com">    
+
+    <link rel="stylesheet" href="/css/appUI.css">
+
+    <link rel="stylesheet" href="/css/fine-uploader-gallery.min.css">
+
+  
+
+    <!-- TREEE THEME -->
+    <link rel="stylesheet" href="/js/lib/tree/themes/default/style.min.css">
+
+    <script src="https://apis.google.com/js/platform.js"></script>
+
+    <!-- LIBS --> 
+
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/bootstrap-tagsinput.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/URI.js"></script>
+    <!--<script src="/js/lib/dropzone.js"></script>-->
+
+    <script src="/js/lib/fine-uploader.min.js"></script>
+
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-events-tap.js"></script>
+    <script src="/js/lib/ractive-events-hover.js"></script>
+    <script src="/js/lib/ractive-transitions-fade.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/lib/utilities.js"></script>
+    <script src="/js/lib/defiant.min.js"></script>
+
+    <!-- DHTML COMBO -->
+    <script src="/js/lib/dhtmlxcombo.js"></script>    
+
+    <!-- INPUT MASK -->
+    <script src="/js/lib/jquery.inputmask.bundle.min.js"></script>
+    <script src="/js/lib/inputmask.binding.js"></script>
+    <!-- SLIDER -->
+    <script src="/js/lib/nouislider.min.js"></script>
+
+    <!-- CALENDAR -->
+    <link href='/css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='/css/scheduler.min.css' rel='stylesheet' />
+    <link href='/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='/js/lib/moment-with-locales.min.js'></script>
+    <script src='/js/lib/fullcalendar.min.js'></script>
+    <script src='/js/lib/scheduler.min.js'></script>
+
+    <script src='/js/lib/tree/jstree.min.js'></script>
+   <!-- <script src='/js/lib/rangeslider.min.js'></script> -->
+
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- CONTROLLERS -->
+
+    <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBJhcLGFh_sRflxym9x31pf1Z6yx9z0HNc'></script>
+
+    <script src='/js/controllers/ctrl_mapSelector.js'></script>  <!-- MAP SELECTOR -->
+
+    <script src="/js/lib/richmarker.js"></script>
+    <script src='/js/controllers/ctrl_main.js'></script>
+    <script src='/js/controllers/ctrl_app.js'></script>  <!-- READY INIT -->
+    <script src='/js/controllers/ctrl_publicacionGenerar.js'></script>  <!-- READY INIT -->
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="headerDiv"></div>
+  <div id="miniMenu" class=" show-for-small-only miniMenu"></div>
+
+
+    <div id="contentUI" class=""></div>
+    <div id="footerApp" class="footerApp"></div>
+
+  <div id="modal"></div>
+  <div id="modales"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+</html>
+
+
+  
+
+
+<!-- MAIN -->
+<script id='mainT' type='text/ractive'>
+
+<div class="minHeader">
+    <div class="row">
+        <div id="header" class="small-12 columns gapTop gapBottom">
+            <div class="small-4 columns collapse">
+                <div  class="hide-for-small-only logoSub"><img on-click="retHome" class="pointer" src="/img/logoApp.png"></div>
+            </div>
+             
+             <div class="small-4 columns collapse gaptop show-for-small-only ">
+                <img on-click="toogleMenu" class="pointer" src="/img/menu.png">
+             </div>
+            <div class="small-4 columns collapse smallHeader show-for-small-only ">
+               
+                <div class="pointer show-for-small-only" style="text-align:center;padding:10px"><img on-click="retHome" src="/img/logoComp.png"></div>
+            </div>
+
+             <div class="small-4 column collapse " id="loginContainer" ></div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+<div id="backMenu" class="hide-for-small-only backMenu">
+</div>
+
+<div class="contentApp">
+    <div class="row contApp">
+      
+      <div id="subUI">
+        
+      </div>
+
+
+    </div>
+</div>
+
+</script>
+
+
+<!-- Main Menu -->
+<script id='menuT' type='text/ractive'>
+<div class="hide-for-small-only seccCont row">
+      {{#each user.seccs}}
+        {{#if parent==undefined}}
+        <div on-click="menuClick" class="menuItem {{#if urlApp==info.url}}menuSelected {{/if}}">
+            <div class="menuWarn">{{warn}}</div>
+
+            <div class="menuIco"><img class="menuImg" src="/img/icosMenu/{{info.ico}}"></div>
+            <div class="menuText">{{info.nombre}}</div>
+
+            <div class="menuItemCont {{#if urlApp==info.url}}menuItemSel {{/if}}"></div>
+        </div>
+        {{/if}}
+
+      {{/each}}
+  </div>
+</script> 
+
+<!-- Main Menu -->
+<script id='minimenuT' type='text/ractive'>
+
+<div  class="miniCont">
+<div class=" seccContMini row">
+
+      <img src="/img/logoApp.png" class="gapbot2">
+
+      <div id="seccsCont">
+      {{#each user.seccs}}
+       {{#if list==undefined}}
+        <div on-click="menuClick" class="menuItemMini {{#if urlApp==info.url}}menuSelected {{/if}} {{#if parent!=undefined}}miniParentBack{{/if}}">
+          {{#if warn>0}}
+            <div class="menuWarn">{{warn}}</div>
+          {{/if}}  
+            <div class="{{#if parent!=undefined}}menuLeftPad{{/if}}">
+            <div class="menuIcoMini "><img class="menuImg" src="/img/icosMenu/{{info.ico}}"></div>
+            <div class="menuTextMini ">{{info.nombre}}</div>
+            </div>
+
+            
+        </div>
+        
+         {{/if}}
+      {{/each}}
+      </div>
+  </div>
+  </div>
+</script>  
+
+<!-- Login -->
+<script id='loginRepT' type='text/ractive'>
+   
+ 
+    <div class="loginCont  gaptop ">
+   
+        <btGen id="loginOptions" class="loginOptions">
+         <div class="checkCont">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+    </svg>
+</div>
+
+
+        Mi cuenta</btGen>
+        <div class="hidden">
+            <div class="opt">
+                <ul class="userOpt nonSel">
+                  {{#each data.seccs}}
+                      {{#if parent==undefined}}
+                      <li class="mainM" on-click="getSecc">{{info.nombre}}</li>
+                      {{/if}}
+
+                      {{#if list==undefined && parent!=undefined}}
+                      <li class="sub" on-click="getSecc"><b>{{info.nombre}}</b></li>
+                      {{/if}}
+
+                   {{/each}} 
+                   
+                   <hr>
+                   <div class="userMenu">{{data.username}} </div>
+                   <li class="cerrarMenu" on-click="cerrarSesion">Cerrar Sesión</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+
+
+
+<!-- LEFT MENU ============================================================-->
+<script id='subItemsT' type='text/ractive'>
+    <div class="hide-for-small-only medium-2 large-1 column leftMenu collapse ">
+        {{#each subs:num}}
+
+          {{#if list==undefined}}
+          <div on-click="menuClick" class="leftItem {{#if urlApp==info.url}}subSelected {{/if}}">
+              <div class="menuIco"><img class="menuImg" src="/img/icosMenu/{{info.ico}}"></div>
+              <div class="menuText">{{info.nombre}}</div>
+          </div>
+          {{/if}}
+        {{/each}}
+    </div>
+    <div class="small-12 medium-10 large-11  column  subContainer">
+        <div id="subContent" class="subContent gaptop2 gapbot2"></div>
+    </div>
+
+    
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='itemsT' type='text/ractive'>
+    <div class="small-12 medium-6 large-6 column ">
+    <div class="small-12 column itemBusqueda collapse ">
+
+   
+
+     <!-- Info Central  -->
+     <div class="small-12 column ">
+        <div class="small-6 column imgTipo collapse gapTop">
+          <img src="/img/ribbon1.png">
+          <img src="/img/tipo_camion.png">
+        </div>
+
+        <div class="small-6 column  collapse gapTop">
+              
+     
+
+         <!--   <div class="small-12  column collapse">
+                <div class="descuento">- ${{descuento}}</div>
+            </div>
+            -->
+            <div class="small-12  column collapse">
+
+                <button class="btAct right gapTop">Editar</button>
+            </div>
+
+        
+         </div>
+
+        
+        
+
+        <div class="small-12 columns gapTop">
+           {{finaliza}}
+        </div>
+
+        <div class="small-12 columns gapTop">
+          {{#each carac:num}}
+             <div class="carac">{{carac[num]}}</div>
+          {{/each}}
+
+        </div>
+
+         
+       </div>
+    </div>
+</div>
+
+</script>
+
+
+
+</script>
+
+
+<script id='msgListT' type='text/ractive'>
+
+<div class="row">
+
+    <div class="small-12 column gapbot">
+      <div class="headerTitle">
+           <div class="small-12 medium-8 column collapse"> Mensajes </div>
+     </div>       
+
+        <div class="small-12 column">
+           {{#each msgsA:num}}
+          <div class="small-12 column msgCont" on-click="@.set('idA',num)">
+            <div class="msgSender">{{tipo}} {{extID}}</div>
+            <div class="msgB">
+              <div class="contMsg">
+              {{#each msgs}}
+              <div class="msgBody small-12 column"><b>{{name}}</b></div>
+              <div class="msgBody small-10 column">{{body}}</div>
+              <div class="msgTime small-2 column">{{momentDate(ts)}}</div>
+              {{/each}}
+              </div>
+
+              {{#if idA==num}}
+                <div style="display: block;width: 100%;">
+         
+              <label class="textareaContainer  gaptop">
+                 <textarea rows="1"  class="preguntaArea finput" placeholder="Escriba su respuesta..."></textarea>
+              </label>
+                <div id="" class=" btAct blue right gapbot" on-click="addAddr">enviar</div>
+               </div>
+               {{/if}}
+
+            </div>
+
+
+          </div>
+
+          {{/each}}
+
+
+      
+        </div>
+       
+
+
+
+    </div>
+
+
+</div>
+
+</script>
+
+
+
+
+<!--  LOADER FIRST -->
+
+<script id='loaderT' type='text/ractive'>
+
+<div class="loaderCont">
+    <div class="animCont">{{txtBt}} {{{loader}}}</div>
+</div>
+
+</script>
+
+
+
+
+<!-- FOOTER ============================================================-->
+<script id='footerT' type='text/ractive'>
+
+
+
+      <div class="small-12 columns ">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooterApp  ">Ayuda
+            <li></li>
+            <li>Manual</li>
+            <li>Tengo un problema</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooterApp">Videos
+            <li>Tutoriales</li>
+             <li>Tutoriales</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooterApp">Soporte
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+           <div class="small-12 medium-3 columns">
+            <ul class="ulFooterApp">Herramientas
+            <li>Simulador Tarifas</li>
+            <li>Datos de Consulta</li>
+           
+            </ul>
+          </div>
+
+         
+
+        </div>  
+
+      </div>
+
+
+</script>
+
+
+
+
+<!-- FLOTILLA RESUME ============================================================-->
+<script id='fresumeT' type='text/ractive'>
+    
+   <div class="headerTitle">
+           <div class="small-12 medium-8 column collapse">Empresa</div>
+          <div class="small-12 medium-4 column">
+         
+          </div>
+    </div>
+
+    <div class="small-12 grupoF column collapse"> 
+        <div class="small-12 medium-3 column ">
+            <div class="tF">Para comenzar a recibir clientes:</div>
+        </div>
+
+        <div class="small-12 medium-3 column  ">
+
+        <div class="doneCont">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+          </svg>
+        </div>
+
+
+            <div class="recInfo" on-click="goBases">
+            <div class="pasoNum">1</div>
+            <img class="icoF" src="/img/icosMenu/base32.png">
+            <div class="textoF">Crea una nueva base</div>
+            <div class="subtextoF">Para asociar a tus bases</div>
+
+            </div>
+        </div>
+
+        <div class="small-12 medium-3 column ">
+         <div class="doneCont">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+          </svg>
+        </div>
+            <div class="recInfo" on-click="goUnidades">
+            <div class="pasoNum">2</div>
+            <img class="icoF" src="/img/icosMenu/unidades.png">
+            <div class="textoF">Agregar unidades a mi flotilla</div>
+            <div class="subtextoF">Preparalas para estar disponibles</div>
+            </div>
+        </div>
+
+
+         <div class="small-12 medium-3 column  ">
+          <div class="doneCont">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+              <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+          </svg>
+        </div>
+            <div class="recInfo" on-click="goPreferencias">
+            <div class="pasoNum">3</div>
+            <img class="icoF" src="/img/icosMenu/certificate.png">
+            <div class="textoF">Configura tu perfil</div>
+            <div class="subtextoF">Sube tu documentación<br>Metodos de pago</div>
+            </div>
+        </div>
+
+
+    </div>
+
+    
+</script>
+
+
+</html>
+

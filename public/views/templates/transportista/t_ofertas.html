@@ -1,0 +1,155 @@
+
+<!-- OFERTAS  ============================================================-->
+
+<script id='ofertasT' type='text/ractive'>
+    
+    <div class="row">
+        <div class="small-12 columns emailOptions">
+            <div class="small-12 columns">
+              <div id="alertCont" class="alertCont"></div>
+             </div>
+
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorTransportista" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Transportista</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="transportista" placeholder="TRANSPORTISTA" name="transportista" tabindex="2"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoTransportista"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorOrigen" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Origen</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="origen" placeholder="ORIGEN" name="origen" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoOrigen"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorDestino" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Destino</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="destino" placeholder="DESTINO" name="destino" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoDestino"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorPrecio" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Precio lista</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="precio" placeholder="PRECIO" name="precio" tabindex="1"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoPrecio"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+                 <div class="small-12 columns spacebot collapse">
+                <div id="errorDescuento" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Descuento</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="descuento" placeholder="DESCUENTO" name="descuento" tabindex="2"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoDescuento"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorfdisponible" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Fecha disponible</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="fdisponible" placeholder="FECHA DISPONIBLE" name="fdisponible" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icofdisponible"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorHorario" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Horario</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input  class="ginput" id="horario" placeholder="HORARIO" name="horario" type="text" tabindex="4"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoHorario" class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorCaracteristicas" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Características</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="caracteristicas" placeholder="CERTIFICACION" name="caracteristicas" tabindex="6"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCaracteristicas"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorReserva" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Reserva</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="reserva" placeholder="RESERVA" name="reserva" tabindex="6"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoReserva"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+            <div class="small-12 column spacebot spacebot collapse">
+            <div>
+             <div class="small-12 spacetop column center collapse">
+                 <div on-enter="submit" on-click="submit" id="subBt" tabindex="7" class="bt largeC b_green">Guardar</div>
+             </div>
+            </div>
+       </div>
+    </div>
+</script>

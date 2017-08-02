@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>DATMED  | Confirmación</title>
+     <!-- METAS -->
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS -->
+       
+        <link rel="stylesheet" href="../css/normalize.css"/>
+        <link rel="stylesheet" href="../css/foundation.min.css"/>
+        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+        <!-- LIBS --> 
+        <script src='../js/lib/jquery-1.9.1.min.js'></script>
+        <script src="../js/lib/foundation.min.js"></script>
+        <script src="../js/lib/foundation/foundation.alert.js"></script>
+        <script src="../js/lib/foundation/foundation.reveal.js"></script>
+        <script src="../js/lib/foundation/foundation.tooltip.js"></script>
+        <script src="../js/lib/foundation/vendor/modernizr.js"></script>
+        <script src="../js/lib/ractive.js"></script>
+        <script src="../js/lib/ractive-events-keys.js"></script>
+        <script src='../js/lib/defiant.js'></script>
+        <script src="../js/lib/URI.js"></script>
+        <script src='../js/lib/jquery.bpopup.min.js'></script>
+        <script src='../js/utilities/utilities.js'></script>
+
+        <!-- CONTROLLERS -->
+        <script src='../js/controllers/ctrl_main.js'></script>
+        <!-- USER CONTROLLERS -->
+        <script src='../js/controllers/ctrl_footer.js'></script>
+        <script src='../js/controllers/ctrl_recuperar.js'></script>
+
+        <!--FAV -->
+        <link rel="icon" type="image/png" href="../img/fav.png" />    
+</head>
+
+
+<body>
+   <div id="progressBar"></div>
+  <div id="wrapper">
+    <div id="content"></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+</body>
+
+<!-- LOGIN T ============================================================-->
+<script id='recuperarT' type='text/ractive'>
+
+
+ <div id="mainH">
+   <div class="row">
+      <div id="topBar" class="box small-12 medium-8 large-8 column small-centered">
+         <div class="small-12  medium-6 column">
+            <img class="logoMain" src="img/logo1.png">
+         </div>
+         <div class="small-12 small-centered medium-6 right column loginControls">
+             <a href="signup">
+               <div class="bt small b_dark">Suscripción</div>
+            </a>
+            <a href="help">
+               <div class="bt small b_dark">F.A.Q.</div>
+            </a>
+           
+         </div>
+      </div>
+   </div>
+</div>
+<div class="row">
+   <div class="cBox small-12 medium-8 large-8 column small-centered">
+      <div class="small-12 column loginOptions">
+        <h4>Ingresa tu correo electrónico registrado</h4>
+      </div>
+      
+      <div class="row">
+    <div id="loginBox" class="box small-11 medium-8 large-8 column small-centered">
+
+
+            <div id="alertCont" class=""></div>
+
+
+
+            <div class="small-12 column">
+                     <input id="email" name="email" type="text" tabindex="1" placeholder="" />
+            </div>
+
+            <div class="small-12 column center">
+                 <button type="submit" on-click="recuperar" class="action-button-largo shadow animar azul">Recuperar contraseña</button>
+             </div>
+
+          
+    </div>
+
+
+</div>
+
+
+</div>
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='recuperarDoneT' type='text/ractive'>
+
+<div class="row">
+    <div id="loginBox" class="box small-11 medium-8 large-8 column small-centered">
+
+     
+            <div class="small-12 column">
+                <h2 class="tAzul">Se ha enviado su contraseña a su correo electrónico</h2>
+                 <center><a href="../login"><div class="action-button-largo shadow animar azul">Ingresar a mí cuenta</div></a><center>
+                
+            </div>
+          
+    </div>
+</div>
+</script>
+
+
+
+
+<!-- FOOTER ============================================================-->
+    <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/acercade" target="_blank" >Acerca de</a></div>
+         <div class="itemFooter"><a href="/privacidad" target="_blank" >Privacidad</a></div>
+         <div class="itemFooter"><a href="terminos" target="_blank" >Terminos de uso</a></div>
+      </div>
+    </script>
+
+
+<!--  ALERT ============================================================-->
+    <script id='alertT' type='text/ractive'>
+       <div data-alert id="alertDiv" class="alert-box {{tipo}}">
+             <div id="msgAlert">{{msg}}</div>
+              <a href="#" class="close">&times;</a>
+        </div>
+    </script>
+
+ 
+</html>

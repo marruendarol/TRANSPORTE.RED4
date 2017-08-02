@@ -1,0 +1,81 @@
+
+<!-- RUTAS ============================================================-->
+
+<script id='rutasT' type='text/ractive'>
+    
+    <div class="row">
+        <div class="small-12 columns emailOptions">
+            <div class="small-12 columns">
+              <div id="alertCont" class="alertCont"></div>
+             </div>
+
+                 <div class="small-12 columns spacebot collapse">
+                <div id="errorTransportista" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Transportita</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="transportista" placeholder="TRANSPORTISTA" name="transportista" tabindex="2"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoTransportista"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorOrigen" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Origen</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="origen" placeholder="ORIGEN" name="origen" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoOrigen"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorDestino" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Destino</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="destino" placeholder="DESTINO" name="destino" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoDestino"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorObservaciones" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Observaciones</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="Observaciones" placeholder="COSTO UNITARIO" name="Observaciones" tabindex="7"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoObservaciones"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+            <div class="small-12 column spacebot spacebot collapse">
+            <div>
+             <div class="small-12 spacetop column center collapse">
+                 <div on-enter="submit" on-click="submit" id="subBt" tabindex="7" class="bt largeC b_green">Guardar</div>
+             </div>
+            </div>
+       </div>
+    </div>
+</script>

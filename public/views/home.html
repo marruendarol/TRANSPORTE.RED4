@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>transporte.red®</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="transportepuntored">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="teranodo | Data Share">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transporte en México.">
+
+     <meta name="google-signin-client_id" content="485665433046-3v6hok8sfeu0th312tcllsb24apabvld.apps.googleusercontent.com">    
+
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="/img/fav.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-events-tap.js"></script>
+    <script src="/js/lib/ractive-events-hover.js"></script>
+    <script src="/js/lib/ractive-transitions-fade.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/lib/ractive-transitions-typewriter.js"></script>
+    <script src="/js/lib/digitalspaghetti.password.js"></script>
+     <script src='/js/lib/moment.min.js'></script>
+    <script src='/js/lib/es.js'></script>
+    <script src="/js/utilities/utilities.js"></script>
+    <script src="/js/lib/defiant.min.js"></script>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+
+      <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+
+     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+     <script src="../js/lib/richmarker.js"></script>
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+    <script src='/js/controllers/ctrl_loginSub.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_home.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='homeT' type='text/ractive'>
+<div class="topOverlay"></div>
+<div class="backHeader">
+
+
+    <div class="row">
+
+        <div id="header" class="small-12 columns gapTop2">
+
+            <div class="small-12 medium-8 columns collapse">
+            <div class="logoMain" class="hide-for-small-only"><img src="/img/logoApp.png"></div>
+             
+            </div>
+
+
+            <div class="small-12 medium-4  columns collapse  gapTop">
+             
+            <div id="loginContainer"></div>
+
+            </div>
+    
+        </div>
+
+        <div id="busqueda" class="small-12 columns gapTop">
+
+
+           <div class="g-signin2" style="display:none;" data-onsuccess="onSignIn" data-theme="dark"></div>
+
+
+            <h1 >Encuentra tu transporte... </h1>
+            <div id="tipoT" class="tipoT show-for-medium-up"></div>
+            <div class="controlsCont">
+                <div class="small-12 medium-6 large-3 columns collapse ">
+                    <div class="iOrigenCont inputCont leftCont">
+                    <div class="icoCont"><img src="/img/origen.png"></div>
+                    <input tabindex="1" id="iOrigen" on-enter="selOrigen" on-downarrow="selOrigenDown" on-uparrow="selOrigenUp"   value="{{strOrigen}}" type="text" class="bInput" placeholder="Ciudad origen" >
+                    </div>
+                    <div id="resOrigen" class="resOrigen"></div>
+                </div>
+                <div class="small-12 medium-6 large-3  columns collapse">
+                    <div class="iDestinoCont inputCont">
+                    <div class="icoCont"><img src="/img/destino.png"></div>
+                    <input tabindex="2" id="iDestino" on-enter="selDestino" on-downarrow="selDestinoDown" on-uparrow="selDestinoUp"   value="{{strDestino}}" type="text" class="bInput" placeholder="Ciudad destino" >
+                    </div>
+                    <div id="resDestino" class="resDestino"></div>
+                </div>
+
+                 <div class="small-12 medium-6 large-2  columns collapse">
+                    <div tabindex="3" class="iFechaCont inputCont fechaOptions">
+                    <div class="icoCont"><img src="/img/calendar.png"></div>
+                       <div  class="fechaText">{{fechaSel.comp}}</div>
+                    </div>
+                   
+                    <div class="hidden"> 
+                        <div class="opt">
+                                   
+                          <div class="fechasCont">
+                          {{#each fechas:num}}
+                          <div class="fechaTipo {{#if tipo}}selDay{{/if}}" on-click="dayClick"> 
+                            <div class="{{#if tipo}}topTipo{{else}}topTipoDisabled{{/if}}"></div> 
+                            <div class="contMes">       
+                              <div class="numDia">{{dia}}</div>
+                              <div class="numMes">{{numDia}}</div>
+                              <div class="descMes">{{abrMes}}</div>
+                            </div>
+                          </div>
+                          {{/each}}
+                          </div>
+                         
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                 <div class="small-12 medium-6 large-3  columns collapse">
+                    <div tabindex="4" class="iTipoCont inputCont tipoCont baseoptions" >
+                         <div class="minitipoIco"><img class="minitipoHomeImg" src="{{tipoSel.icon}}">
+                         <div class="tipoText">{{tipoSel.text}}</div>
+
+                         </div>
+                    </div>
+                    
+                   
+                    <div class="hidden"> 
+                        <div class="opt">
+                                   
+                         <div class="tiposCont">
+                          {{#each tipos:num}}
+                          <div class="small-6 medium-3 column">
+                              <div class="titCat">{{text}}</div>
+
+                                {{#each children}}
+                                  <div class="recTipo {{#if tipoSel.id==id}}selTipo{{/if}}"  on-hover="hoverTipo" on-click="tipoClick">
+                                        <div class="topTipo"></div>
+                                        <div class="contTipo">
+                                            <div class="textTipo">{{text}} </div>
+                                            <!--{{#if hovering}}
+                                            <img intro-outro='slide' class="imgTipoRec" src="{{icon}}"> 
+                                            {{/if}}-->
+                                        </div>
+                                  </div>
+
+                                {{/each}}
+                                 
+                           </div>   
+                                
+                          {{/each}}
+                         
+                        </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+               
+
+                 <div class="small-12 medium-12 large-1 end  columns collapse">
+                    <div on-click="buscarBt" tabindex="5" class="buscarBt {{btDis}}">{{{txtBt}}}</div>
+                </div>
+
+              
+             
+  
+              
+            </div>
+
+            
+
+        </div> <!-- END BUSQUEDA -->
+
+
+    </div>    <!-- END ROW -->
+</div>  <!-- END BACKHEADER -->
+
+
+<!-- PUBLICACIONES  -->
+
+
+<div id="ofertas" class="small-12 columns">
+
+{{#if searchOn}}
+  <div class="row  ofertasBack">  
+
+      <div class="small-12 columns headerOfertas">
+      </div>
+
+      <div class="small-12 medium-3 column  ">
+   
+
+
+<!-- FILTROS -->
+
+<div class="small-12 column collapse module">
+
+  <titSpan><span>Filtros</span></titSpan>
+
+    
+
+       
+      <div class="small-12 medium-12 column collapse">
+          <div class="minitit">Características</div>
+          <div class="minidata gaptop">
+
+             <div class="small-12 medium-12 column collapse">
+          {{#each filtersCarac:num}}
+            <div intro-outro='fade' class="filter"><div on-click="removeFilterCarac" class="delFilter">x</div>{{desc}}</div>
+          {{/each}}
+       </div>
+            
+            {{#each caracl:num}}
+        <div class="small-12   column gapbot extraRow">
+            <div class="checkCont">
+            <!--<input id="c{{id}}" type="checkbox" {{#if checked}}checked{{/if}}  on-click='selToggle' >-->
+            <label on-click="addFilterCarac" class="itemFilter" for="c{{id}}">{{desc}}</label>
+            </div>
+             
+        </div>
+      
+          {{/each}}
+
+          </div>
+          <div class="miniunity"></div>
+      </div>
+
+   <div class="small-12 column separator"></div> 
+
+       
+
+
+      <div class="small-12 medium-12 column collapse">
+          <div class="minitit">Servicios opcionales</div>
+          <div class="minidata gaptop">
+
+          <div class="small-12 medium-12 column collapse">
+          {{#each filtersServ:num}}
+            <div intro-outro='fade' class="filter"><div on-click="removeFilterServ" class="delFilter">x</div>{{desc}}</div>
+          {{/each}}
+       </div>
+
+
+          {{#each servicios:num}}
+         
+        <div class="small-12   column gapbot extraRow">
+            <div class="checkCont">
+            <!--<input id="c{{id}}" type="checkbox" {{#if checked}}checked{{/if}} on-click='selToggle'   >-->
+            <label on-click="addFilterServ" class="itemFilter" for="c{{id}}">{{desc}}</label>
+            </div>
+             
+        </div>
+      
+          {{/each}}
+
+
+          </div>
+          <div class="miniunity"></div>
+      </div>   
+
+   <div class="small-12 column separator"></div> 
+
+    
+     <!-- <div class="small-12 medium-12 column collapse">
+          <div class="minitit">Capacidades</div>
+          <div class="minidata gaptop">
+              <label>{{volAvMin}} - {{volAvMax}} Toneladas</label>
+              <div id="volFilter"  class="sliders small-12 "  ></div>            
+
+          </div>
+          <div class="miniunity"></div>
+      </div>  
+
+
+      --> 
+
+   
+
+
+      <div class="small-12 medium-12 column collapse">
+          <div class="minitit">Modelo unidad</div>
+          <div class="minidata gaptop">
+
+          <div class="small-12 medium-12 column collapse">
+          {{#each filtersAnos:num}}
+            <div intro-outro='fade' class="filter"><div on-click="removeFilterAno" class="delFilter">x</div>{{desc}}</div>
+          {{/each}}
+       </div>
+            
+             {{#each anos:num}}
+         
+        <div class="small-12   column gapbot extraRow">
+            <div class="checkCont">
+           <!-- <input id="c{{id}}" type="checkbox" {{#if checked}}checked{{/if}} on-click='selToggle' >-->
+            <label on-click="addFilterAno" class="itemFilter" for="c{{id}}">{{desc}}</label>
+            </div>
+             
+        </div>
+      
+          {{/each}}
+
+          </div>
+          <div class="miniunity"></div>
+      </div>   
+
+</div>
+
+</div>
+
+
+<div class="small-12 medium-9 column ">
+    <div class="pubHeader">
+
+        <div class="contHeaderHome gapbot">
+        <div class="icoCont"><img src="/img/origen.png"></div>{{infoSearch.origen.shortN}}
+    </div>
+    <div class="contHeaderHome gapbot">
+        <div class="icoCont"><img src="/img/destino.png"></div>{{infoSearch.destino.shortN}}
+    </div>
+
+        <div on-click="masInfo" class="masInfoRuta">
+    información ruta <img class="icomore rotate {{#if masinfo}}rotateDown{{/if}} " src=/img/closemore.png>
+</div>
+
+  <!--
+    <div class="contHeaderHome gapbot">
+        <div class="icoCont"><img src="/img/calendar.png"></div>
+        <div class="fechaText">{{fechaSel.comp}}</div>
+    </div>
+
+     <div class="contHeaderHome">
+        <div class="minitipoIco"><img class="minitipoHomeImg" src="{{tipoSel.icon}}">
+            <div class="tipoText">{{tipoSel.text}}</div>
+        </div>
+    </div>
+
+-->
+        <select on-change="sortChange" value="{{sortORD}}"  class="selectRes">
+          <option value="-info.totalDesc">Oferta: de Mayor a menor</option>
+          <option value="costos.granIVA">Precio: de más bajo a más alto</option>
+          <option value="-costos.granIVA">Precio: de más alto a más bajo</option>
+          <option value="reputacion">Reputación: Mayor a menor</option>
+        </select>
+
+    </div>
+
+     {{#if masinfo}}
+      <div intro-outro='slide' class=" small-12 columns masInfoCont collapse">
+          <!-- Ruta Info -->
+
+          <div class="small-12 medium-12 column collapse">
+           <div class="module">
+                  <titSpan><span>Ruta Sugerida </span></titSpan>
+                      <div class="small-12 medium-12 column collapse">
+                          <div class="minitit">Ruta</div>
+                          <div class="minidata">{{ruta.descripcion}}</div>
+                          <div class="miniunity">(fuente. STC.)</div>
+                   
+                      </div>
+
+                     
+
+                      <div class="small-12 column separator"></div> 
+
+                        <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Tiempo total</div>
+                          <div class="minidata">{{tiempo(ruta.tiempoTotal)}}</div>
+                          <div class="miniunity">hr</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Casetas</div>
+                          <div class="minidata">{{ruta.casetasNo}}</div>
+                          <div class="miniunity">no.</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Distancia total</div>
+                          <div class="minidata">{{distancia(ruta.distanciaTotal)}}</div>
+                          <div class="miniunity">km.</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Precios Gasolinas</div>
+                          {{#each ruta.gasolinas:num}}
+                          <div class="minidata">{{ruta.gasolinas[num]['tipo-costo']}}</div>
+                          {{/each}}
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                  </div>
+              </div>
+
+        
+          <!-- Mapa -->
+          <div class="small-12 medium-12 column collapse gapbot2">    
+                  <div id="ubica"></div>   
+          </div>
+         
+
+   
+
+      {{/if}}
+    <!--  PUBLICACIONES ---------------------------------------------------------------- -->
+
+    {{#if publicaciones.length==0}}
+        <h3>No existen publicaciones bajo esos términos de búsqueda</h3> 
+        <div on-click="buscarExtra" tabindex="5" class="btAct blue  gaptop">¿Desea hacer otra búsqueda en ciudades cercanas?.</div>
+    {{/if}}
+
+    {{#each publicaciones}}
+      {{#if visible}}
+          {{>publicacionT}}
+      {{/if}}
+
+    {{/each}}
+</div>
+ 
+     
+
+      <div class="avisoDescOfertas">* Las ofertas presentadas contemplan solo el precio <b>base</b> del viaje configurado por el transportista bajo la ruta sugerida, servicios opcionales o condiciones especiales podrán modificar el precio final.</div>
+  </div>
+
+{{/if}}
+</div>
+
+<!-- END PUBLICACIONES -->
+
+
+{{#if !searchOn}}
+<div id="infoPortal" class="small-12 columns">
+    <div class="row">  
+      
+      <div class="small-12 columns"><h2>Aprovecha las herramientas de transportista</h2></div>
+        
+        <div class="small-12 medium-6 columns infoP">
+          <div class="infoCont preciosBack">
+          <div class="icoVentajas"><img src="/img/tiempo.png"></div>
+           <div class="txtVentajas">Ahorra tiempo al cotizar</div>
+           <div class="descVentajas">Tú decides tu margen de ganacia y tu porcentaje de gastos.<br>El sistema auto cotiza considerando tus preferencias. </div>
+           </div>
+        </div>
+
+
+        <div class="small-12 medium-6 columns infoP">
+        <div class="infoCont inteligenciaBack">
+          <div class="icoVentajas"><img src="/img/ia.png"></div>
+           <div class="txtVentajas">Haz que te encuentren rápido</div>
+            <div class="descVentajas">Las búsquedas son gestionadas por algorítmos de inteligencia artificial que facilitan las búsquedas en tiempo real.</div>
+            </div>
+        </div>
+
+        <div class="small-12 medium-6 columns infoP">
+        <div class="infoCont herramBack">
+          <div class="icoVentajas"><img src="/img/utilidad.png"></div>
+           <div class="txtVentajas">Obtén más utilidad</div>
+            <div class="descVentajas">* Solo el <b>4%</b> de comisión por viaje completado.<br> Sin costos ocultos, ni cuotas fijas.</div>
+            <div class="avisoTransportista">* Contra un 10% a 25% de nuestra competencia. </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="small-12 medium-6 columns infoP">
+        <div class="infoCont gestionBack">
+          <div class="icoVentajas"><img src="/img/disponibilidad.png"></div>
+           <div class="txtVentajas">Dale tranquilidad a tu cliente</div>
+            <div class="descVentajas">El sistema mantiene comunicados al transportista y al cliente para rastreo y actualizaciones de estatus </div>
+            </div>
+        </div>
+
+
+        <div class="small-12 medium-12 columns center ">
+          <button class="btAct blue centered gapTop gapbot2">Comienza a obtener clientes</button>
+        </div>
+
+         
+       
+       
+    </div>
+</div>
+{{/if}}
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="/img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportistas
+            <li>Preguntas Frecuentes</li>
+            <li>Términos y condiciones</li>
+            <li>Políticas de Privacidad</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Usuarios
+            <li>Preguntas Frecuentes</li>
+             <li>Términos y condiciones</li>
+            <li>Políticas de Privacidad</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Redes Sociales
+            <li>Facebook</li>
+            <li>Twitter</li>
+            
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<script id='tipoVT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="/img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="/img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+
+<!-- Oferta T ============================================================-->
+<script id='publicacionT' type='text/ractive'>
+<div intro-outro='fade' class="small-12 medium-12 column oferta">
+
+    {{#if costos.foranea}}
+            <div class="small-12 column">
+              <div class=" gapbot">
+                <div class="icoCont"><img src="/img/origen.png"></div>{{cCase(info.sucursalDesc)}}
+            </div>
+       </div>     
+    {{/if}}
+
+
+    <div class="small-12 medium-6 large-4 column">
+     
+           <div class="rep">
+          
+          <div class="pubTit">{{info.path}}</div>
+
+            <div class="small-12 column collapse gaptop  left">
+            {{#if info.logotipo.length>0 && info.logotipo!=undefined}}
+            <img class="logoOferta" src="{{info.logotipo}}">
+            {{/if}}
+           <span class="stars-container stars-50">★★★★★</span>
+            </div>
+
+           <div  class="small-12 column collapse ">
+             
+             <img class="center icoOferta" src="{{info.tipoImg}}">
+           </div>
+        </div>  
+
+        <div class="small-12 column">
+              <div class="fechaOferta">{{info.marca}} {{info.modelo}}</div>
+          </div>
+
+    </div>
+
+
+
+    <div class="small-12 medium-6 large-4 column gapbot collapse">
+         <div class="small-12  gapTop2 caracCont column collapse">
+          {{#each info.carac:cn}}
+            <div class="carac "><img src="/img/pal.png"> {{desc}}</div>
+          {{/each}}
+          </div>
+
+          {{#if info.servicios.length>0}}
+           <div class="small-12  gapTop2 caracCont column collapse">
+             <div class="carac "><b>Servicios opcionales:</b></div> <br>
+            {{#each info.servicios:cn}}
+              <div class="carac "><img src="/img/serv.png"> {{desc}}</div>
+            {{/each}}
+            </div>
+          {{/if}}
+
+     
+
+           <div class="small-12  caracCont column collapse gaptop">
+                 <div class="carac ">Carga máxima: <b>{{info.cargamax}} toneladas</b></div> <br>
+                 <div class="carac ">Alto: <b>{{info.alto}}m.</b> Ancho: <b>{{info.ancho}}m.</b> Largo: <b>{{info.largo}}m.</b></div>
+           </div>
+
+
+  
+
+    </div>
+
+
+
+
+  <div class="small-12 medium-6 large-4 column">
+        
+       {{#if info.totalDesc>0}}
+                <div class="pub_descuento">Oferta - {{info.totalDesc}}%</div>
+                {{else}}
+                <div class="pub_empty"></div>
+            {{/if}}
+          
+            
+           <div class="small-12  column gaptop collapse">
+                {{#if !costos.foranea}}
+                <div class="precioOferta">{{moneda(costos.granIVA)}}</div>
+                <div class="avisoOferta">*precio base IVA incluido</div>
+                {{/if}}
+                <button on-click="verPub" class="btAct blue right gapTop">ver publicación</button>
+            </div>
+
+
+
+             <div class="small-12 column collapse gaptop">
+           <div class="validaHasta">válida hasta <db>{{validaH(fechas)}}</db></div>
+           </div>
+
+  </div>
+
+
+
+</div>
+
+</script>
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+<div id="login">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+                <img src="/img/logologin.png">
+            </div>
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column  gapbot center">
+                <div class="small-12 column socialBt gapTop2 ">
+                    <div id="gSignInWrapper gaptop">
+                      <div id="customBtn2" class="customGPlusSignIn">
+                        <span class="buttonText"><span class="icon"></span>Iniciar sesión con Google</span>
+                      </div>
+                    </div>
+                </div>
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="strike">
+                        <span>ó cuenta transporte.red</span>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+                <div class="small-12 column loginContainer gaptop  ">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoEmail" src="/img/user32.png" /></div>
+                        <div class="inputDiv">
+                            <input class="inputEl lowercase" type="text" name="username" placeholder="E-mail">
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 column">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                            <input on-enter="initLog" class="inputEl" type="password" name="password" placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <button on-click="initLog" class="btAct blue btFull gaptop right">Iniciar Sesión</button>
+                    <div class="olvidasteBt  gapTop2 left">¿Olvidaste tu contraseña?</div>
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            ¿No estas registrado?
+            <btGen on-click="goReg">Regístrate</btGen>
+        </div>
+    </div>
+ </div>
+</script>
+
+
+<!-- REGISTRO ============================================================-->
+<script id='registroT' type='text/ractive'>
+<div id="registro">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+               <h2>Selecciona tipo de cuenta:</h2>
+               <h2> <b style="color:#366aa3;">{{tipoCuenta}}</h2>
+            </div>
+
+            <div class="userTipo">
+               <div on-click='@this.set("tipoCuenta", "CLIENTE")' class="btTipo  {{#if tipoCuenta=='CLIENTE'}}selectedTipo{{/if}}  btHalf "><img class="cuentaIco" src="/img/icosMenu/user32.png"><br>Cuenta de Cliente<br><div class="smallDesc">( Contratar servicios )</div></div>
+               <div on-click='@this.set("tipoCuenta", "TRANSPORTISTA")' class="btTipo  {{#if tipoCuenta=='TRANSPORTISTA'}}selectedTipo{{/if}}  btHalf"><img class="cuentaIco" src="/img/icosMenu/unidades.png"><br>Cuenta de Transportista<br><div class="smallDesc">( Proveer servicios )</div></div>
+            </div>
+
+            <div class="small-12 column  gapbot gaptop center">
+               <h2>Crea  tu cuenta con:</h2>
+            </div>
+
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column   center">
+                <div class="small-12 column socialBt ">
+                   
+  <div id="gSignInWrapper">
+    <div id="customBtn" class="customGPlusSignIn">
+      <span class="buttonText"><span class="icon"></span>Crear cuenta con Google</span>
+    </div>
+  </div>
+  <div id="name"></div>
+                  
+                </div>
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="strike">
+                        <span><b>ó</b> cuenta transporte.red</span>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+               
+
+                <div class="small-12 column loginContainer  ">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoEmail" src="/img/user32.png" /></div>
+                        <div class="inputDiv">
+                            <input class="inputEl lowercase" type="text" autocomplete="off" name="username" value="{{username}}" placeholder="E-mail">
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 column">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                          <input on-blur="validatePassM" on-keydown="keydown"  autocomplete="off" class="inputEl" id="password" placeholder="Contraseña" value="{{password}}" name="password" type="password" />
+                        </div>
+                    </div>
+
+                     <div class="inputAll gaptop">
+                        <div  class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                            
+                            <input  value="{{passwordc}}" on-enter="crear" autocomplete="off" class="inputEl" type="password" name="passwordConfirm" placeholder="Confirmar contraseña">
+                        </div>
+                    </div>
+                    <button on-click="crearLocal" class="btAct blue btFull gaptop right">Crear cuenta</button>
+                   
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            
+        </div>
+    </div>
+ </div>
+</script>
+
+<!-- FOOTER ============================================================-->
+<script id='footerT' type='text/ractive'>
+    <div class="legalesFoot">
+        <div class="itemFooter"><a href="/about" target="_blank">{{lan.TX_about}}</a></div>
+        <div class="itemFooter"><a href="/privacy" target="_blank">{{lan.TX_privacy}}</a></div>
+        <div class="itemFooter"><a href="/terms" target="_blank">{{lan.TX_terms}}</a></div>
+    </div>
+</script>
+
+
+<script id='loginRepT' type='text/ractive'>
+    {{#if data.status=="failed"}}
+    <div on-tap="openRegistro" class="loginCont ">
+        <btGen>Regístrate</btGen>
+    </div>
+    <div on-tap="openLogin" class="loginCont ">
+        <btGen>Iniciar Sesión</btGen>
+    </div>
+    {{/if}} {{#if data.status==1}}
+    <div class="loginCont ">
+   
+        <btGen id="loginOptions" class="loginOptions">
+         <div class="checkCont">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    </div>
+
+        Mi cuenta</btGen>
+        <div class="hidden">
+            <div class="opt">
+                <ul class="userOpt nonSel">
+                  {{#each data.seccs}}
+                      {{#if parent==undefined}}
+                      <li class="mainM" on-click="getSecc">{{info.nombre}}</li>
+                      {{/if}}
+
+                      {{#if list==undefined && parent!=undefined}}
+                      <li class="sub" on-click="getSecc"><b>{{info.nombre}}</b></li>
+                      {{/if}}
+
+                   {{/each}} 
+                   
+                   <hr>
+                   <div class="userMenu">{{data.username}} </div>
+                   <li class="cerrarMenu" on-click="cerrarSesion">Cerrar Sesión</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+
+<!-- MAPA INFO ============================================================-->
+<script id='origenPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/origen.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+<script id='destinoPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/destino.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+
+
+<!-- AVISO EDICIÖN -->
+<script id='selectTipoT' type='text/ractive'>
+<div id="selTipo">
+<div class="popCont">
+    <div class="popTit">No existe cuenta
+    <div class="minitit">No existe una cuenta para facebook de transporte.red</div>
+        ¿Deseas crear una cuenta
+    </div>
+
+    <div class="botCont">
+        <div on-tap="cuentaTransportista" class="btAct blue right">Crear cuenta de Transportista</div>
+        <div on-tap="cuentaCliente" class="btAct blue right">Crear cuenta de Cliente</div>
+        <div on-tap="cancel" class="btAct blue right">Cancelar</div>
+
+    </div>
+</div>
+</div>
+
+</script>
+
+
+<!-- AVISO EDICIÖN -->
+<script id='nouserT' type='text/ractive'>
+<div id="nouser">
+<div class="popCont">
+
+ <div class="modalLogin row">
+
+  <div class="small-12 column headerPop "></div>
+
+   <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+    <div class="small-12 column ">
+
+    <div class="popTit gapTop2">No existe cuenta asociada a el usuario Google
+    <div class="minitit gapbot2">Favor de registrar una cuenta</div>
+
+     <div class="botCont ">
+        <div on-tap="goReg" class="btAct blue right gapright " >Ir a Registro</div>
+        <div on-tap="cancel" class="btAct blue right gapright ">Cancelar</div>
+
+    </div>
+    </div>
+
+
+    </div>
+
+    </div>
+</div>
+
+</div>
+
+</script>
+
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='confirmaT' type='text/ractive'>
+<div id="confirma">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+                <img src="/img/logologin.png">
+            </div>
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column  gapbot center">
+                
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="">
+                        <div class="descVentajas" style="color:black;">Tu cuenta esta lista para usarse.<br>
+                        Si requieres ayuda favor de contactarnos al 018002223222.</div>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+       
+                <div class="small-12 column">
+                    <button on-click="goPortada" class="btAct blue btFull gaptop left">Regresar a portada</button>
+                    <button on-click="goPanel" class="btAct blue btFull gaptop right">ir a Mi cuenta</button>
+                    
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            
+        </div>
+    </div>
+ </div>
+</script>
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='localT' type='text/ractive'>
+<div id="local">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+                <img src="/img/emailIco.png">
+            </div>
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column  gapbot center">
+                
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="">
+                        <div class="descVentajas" style="color:black;"><h2>Confirmación de correo.</h2>
+                       Te hemos enviado un correo a <b><i>{{username}}</i></b> para corfirmar tu cuenta, después de recibir este correo por favor seguir la liga para completar el proceso.</div>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+       
+                <div class="small-12 column centered gaptop">
+                    <button on-click="confirm" class="btAct blue btFull gaptop ">Aceptar</button>
+                    
+                    
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            
+        </div>
+    </div>
+ </div>
+</script>
+
+
+
+
+
+</html>

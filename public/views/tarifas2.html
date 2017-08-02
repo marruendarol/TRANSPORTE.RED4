@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>transporte.red | Simulador Tarifario</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="teranodo | Data Share">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/utilities/utilities.js"></script>
+
+      <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_tarifas2.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='homeT' type='text/ractive'>
+
+<div class="backHeader">
+    <div class="row">
+
+        <div id="header" class="small-12 columns collapse gapTop">
+
+            <div class="small-8 columns collapse">
+            <div class="logoMain" class="hide-for-small-only"><img src="img/logo1.png"></div>
+            <div class="logoSmall" class="show-for-small-only"><img src="img/logoComp.png"></div>
+            </div>
+
+            
+        </div>
+
+        <div id="busqueda" class="small-12 columns gapTop">
+
+            <h1>Simulador Tarifas</h1>
+            <div class="row">
+                <div class="small-12 medium-12 large-5 columns collapse ">
+                    <div class="inputCont leftCont">
+                    <div class="icoCont"><img src="img/origen.png"></div>
+                    <input  id="iOrigen" on-enter="selOrigen" on-downarrow="selOrigenDown" on-uparrow="selOrigenUp"  on-blur="selOrigen" value="{{data.strOrigen}}" type="text" class="bInput" placeholder="Ciudad" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad'">
+                    </div>
+                    <div id="resOrigen" class="resOrigen"></div>
+                </div>
+                <div class="small-12 medium-12 large-5  columns collapse">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="img/destino.png"></div>
+                    <input id="iDestino" on-enter="selDestino" on-downarrow="selDestinoDown" on-uparrow="selDestinoUp"  on-blur="selDestino" value="{{data.strDestino}}" type="text" class="bInput" placeholder="Ciudad" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad'">
+                    </div>
+                    <div id="resDestino" class="resDestino"></div>
+                </div>
+                <!-- <div class="small-12 medium-12 large-3 columns collapse">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="img/calendar.png"></div>
+                    <input type="text" class="bInput" placeholder="Fecha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha'">
+                    </div>
+                </div> -->
+                <div class="small-12 medium-12 large-2 end  columns collapse">
+                    <div on-click="bRoute" class="buscarBt">Buscar</div>
+                </div>
+
+              
+            </div>
+
+            <div class="small-12 columns">
+                  <div id="ubica"></div>
+            </div>
+
+        </div> <!-- END BUSQUEDA -->
+
+
+    </div>    <!-- END ROW -->
+</div>  <!-- END BACKHEADER -->
+
+
+
+
+<div id="resultados" class="small-12 columns">
+    <div class="row">  
+      
+      <div class="small-12 columns"><h2>Tarifas</h2></div>
+        
+      
+       <div id="ubica"></div>
+     
+       
+    </div>
+
+</div>
+
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{nombre}}</div><div class="estResTxt"> {{ent_abr}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='destinoResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selDestino" class="{{#if selDestino==num}}selDestino{{/if}}"><div class="munResTxt"><img  src="img/destino.png">{{nombre}}</div><div class="estResTxt"> {{ent_abr}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+
+</script>
+
+
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+
+</script>
+
+<!-- FOOTER ============================================================-->
+   <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/about" target="_blank" >{{lan.TX_about}}</a></div>
+         <div class="itemFooter"><a href="/privacy" target="_blank" >{{lan.TX_privacy}}</a></div>
+         <div class="itemFooter"><a href="/terms" target="_blank" >{{lan.TX_terms}}</a></div>
+      </div>
+    </script>
+
+
+
+
+
+</html>

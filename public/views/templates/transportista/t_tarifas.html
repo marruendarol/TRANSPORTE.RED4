@@ -1,0 +1,95 @@
+
+<!-- TARIFAS  ============================================================-->
+
+<script id='tarifasT' type='text/ractive'>
+    
+    <div class="row">
+        <div class="small-12 columns emailOptions">
+            <div class="small-12 columns">
+              <div id="alertCont" class="alertCont"></div>
+             </div>
+
+                 <div class="small-12 columns spacebot collapse">
+                <div id="errorTransportista" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">TRANSPORTISTA</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="transportista" placeholder="TRANSPORTISTA" name="transportista" tabindex="2"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoTransportista"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorUnidad" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Unidad</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="unidad" placeholder="UNIDAD" name="unidad" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoUnidad"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorDEstino" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Destino</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="destino" placeholder="DESTINO" name="destino" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoDestino"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorCaracteristicas" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Características</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="caracteristicas" placeholder="CARACTERÍSTICAS" name="caracteristicas" tabindex="6"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCaracteristicas"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorCostoU" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Costo Unitario</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="costoU" placeholder="COSTO UNITARIO" name="costoU" tabindex="7"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCostoU"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+            <div class="small-12 column spacebot spacebot collapse">
+            <div>
+             <div class="small-12 spacetop column center collapse">
+                 <div on-enter="submit" on-click="submit" id="subBt" tabindex="7" class="bt largeC b_green">Guardar</div>
+             </div>
+            </div>
+       </div>
+    </div>
+</script>

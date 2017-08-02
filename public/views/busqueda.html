@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Búsqueda Transporte</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="transporte.red">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="img/fav.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/utilities/utilities.js"></script>
+
+     <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_loginSub.js'></script>
+    <script src='/js/controllers/ctrl_busqueda.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='busquedaT' type='text/ractive'>
+<div class="topOverlay"></div>
+<div class="minHeader">
+
+
+    <div class="row">
+
+        <div id="header" class="small-12 columns gapTop gapBottom">
+
+            <div class="small-8 columns collapse">
+            <div  class="hide-for-small-only logoSub"><img src="img/logo1.png"></div>
+             
+            </div>
+
+            <div class="small-12 columns show-for-small-only ">
+               <div on-tap="openLogin" class="miniloginCont show-for-small-only">
+                  <img calss="logoSub" src="img/user.png">
+              </div>
+              <div  class="show-for-small-only" style="text-align:center;"><img src="img/logoComp.png"></div>
+           
+            </div>
+
+            <div class="small-4 end columns collapse  gapTop">
+             <div on-tap="openLogin" class="loginCont hide-for-small-only">
+                  <btGen>Regístrarse</btGen>
+              </div>
+              <div on-tap="openLogin" class="loginCont hide-for-small-only">
+                  <btGen>Iniciar sesión</btGen>
+              </div>
+
+             
+             
+            </div>
+            <div id="loginControls" class="small-4 columns"></div>
+        </div>
+
+        
+
+
+    </div>    <!-- END ROW -->
+</div>  <!-- END BACKHEADER -->
+
+
+
+<div id="items" class="small-12 columns">
+    <div class="row  itemsBack">  
+
+
+      <div class="small-12 medium-3 columns leftFilters">
+
+        <!-- Sub Tipo de Camión --> 
+          <div class="small-12 columns">
+            <div class="labelFilter">Sub tipo</div>
+              <div class="tipoCont subtipooptions" >
+                 <div class="minitipoIco"><img class="minitipoHomeImg" src="{{tipos[tipoSel].img}}">
+                 <div class="tipoText">{{tipos[tipoSel].desc}}</div>
+
+                 </div>
+             </div>
+            <div class="hrFilter"></div>
+          </div>        
+
+        <!-- Tonelaje --> 
+          <div class="small-12 columns">
+             <div class="labelFilter">Carga</div>
+              <div class="sliders small-12 column" id="slide1" ></div>
+              <div class="hrFilter"></div>
+          </div> 
+          
+        <!-- Características --> 
+          <div class="small-12 columns">
+            <div class="labelFilter">Servicios adicionales</div>
+              <label><input type="checkbox" name="">Maniobras Especiales</label>
+             <div class="hrFilter"></div>
+          </div>
+          
+          <!-- Calificación --> 
+          <div class="small-12 columns">
+             <div class="labelFilter">Reputación</div>
+             <div class="hrFilter"></div>
+          </div>             
+
+      </div>
+      
+      <div class="small-12 medium-9 columns">
+
+      <!--  ----------------------------------------------------  -->
+
+
+      <div id="busqueda" class="small-12 columns gapTop">
+
+
+            <div class="controlsCont">
+                <div class="small-12 medium-6 large-3 columns collapse ">
+                    <div class="inputCont leftCont">
+                    <div class="icoCont"><img src="img/origen.png"></div>
+                    <input  id="iOrigen" on-enter="selOrigen" on-downarrow="selOrigenDown" on-uparrow="selOrigenUp"  on-blur="selOrigen" value="{{strOrigen}}" type="text" class="bInput" placeholder="Ciudad origen" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad origen'">
+                    </div>
+                    <div id="resOrigen" class="resOrigen"></div>
+                </div>
+                <div class="small-12 medium-6 large-3  columns collapse">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="img/destino.png"></div>
+                    <input id="iDestino" on-enter="selDestino" on-downarrow="selDestinoDown" on-uparrow="selDestinoUp"  on-blur="selDestino" value="{{strDestino}}" type="text" class="bInput" placeholder="Ciudad destino" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad destino'">
+                    </div>
+                    <div id="resDestino" class="resDestino"></div>
+                </div>
+
+                 <div class="small-12 medium-6 large-3  columns collapse">
+                    <div class="inputCont fechaOptions">
+                    <div class="icoCont"><img src="img/calendar.png"></div>
+                       <div class="fechaText">{{fechas[fechaSel].comp}}</div>
+                    </div>
+                   
+                    <div class="hidden"> 
+                        <div class="opt">
+                                   
+                         
+                          {{#each fechas:num}}
+                           <div class="recTipo" on-click="set('fechaSel', num)"> 
+                            <div class="topTipo"></div> 
+
+                            <div class="contMes">       
+                              <div class="numMes">{{desc}}</div>
+                              <div class="descMes">{{mes}}</div>
+                            </div>
+
+                              </div>
+                          {{/each}}
+                         
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                 <div class="small-12 medium-6 large-3  columns collapse">
+                    <div class="tipoCont baseoptions" >
+                         <div class="minitipoIco"><img class="minitipoHomeImg" src="{{tipos[tipoSel].img}}">
+                         <div class="tipoText">{{tipos[tipoSel].desc}}</div>
+
+                         </div>
+                    </div>
+                    
+                   
+                    <div class="hidden"> 
+                        <div class="opt">
+                                   
+                         
+                          {{#each tipos:num}}
+                           <div class="recTipo" on-click="set('tipoSel', num)"> 
+                            <div class="topTipo"></div> 
+
+                            <div class="contTipo">       
+                              <div class="textTipo">{{desc}}</div>
+                              <img class="imgTipoRec" src="{{img}}"> 
+                            </div>
+
+                              </div>
+                          {{/each}}
+                         
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            
+
+        </div> <!-- END BUSQUEDA -->
+
+      
+      <div class="label"></div>
+       {{#each items}}
+          {{>itemsT}}
+       {{/each}}
+      </div>
+        
+      
+       
+    
+       
+    </div>
+
+</div>
+
+
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<script id='tipoVT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='itemsT' type='text/ractive'>
+    <div class="small-12 medium-12 large-12 column ">
+    <div class="small-12 column itemBusqueda collapse ">
+
+    <!-- Origen - Destino  -->
+    <div class="small-12 column  destinoHeader">
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/origen.png"></div>{{origen}}
+         </div>   
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/destino.png"></div>{{destino}}
+        </div>
+    </div>    
+
+
+     <!-- Info Central  -->
+     <div class="small-12 column ">
+        <div class="small-6 column imgTipo collapse gapTop">
+          <img src="img/ribbon1.png">
+          <img src="img/truck.png">
+        </div>
+
+        <div class="small-6 column  collapse gapTop">
+              
+            <div class="small-12  column collapse">
+                <div class="precioBase">${{precioBase}}</div>
+            </div>
+
+         <!--   <div class="small-12  column collapse">
+                <div class="descuento">- ${{descuento}}</div>
+            </div>
+            -->
+            <div class="small-12  column collapse">
+                <div class="precioOferta">${{precioOferta}}</div>
+                <button class="btAct right gapTop">Ver oferta</button>
+            </div>
+
+        
+         </div>
+
+        
+        
+
+        <div class="small-12 columns gapTop">
+           {{finaliza}}
+        </div>
+
+        <div class="small-12 columns gapTop">
+          {{#each carac:num}}
+             <div class="carac">{{carac[num]}}</div>
+          {{/each}}
+
+        </div>
+
+         
+       
+    </div>
+</div>
+
+</script>
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+
+</script>
+
+<!-- FOOTER ============================================================-->
+   <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/about" target="_blank" >{{lan.TX_about}}</a></div>
+         <div class="itemFooter"><a href="/privacy" target="_blank" >{{lan.TX_privacy}}</a></div>
+         <div class="itemFooter"><a href="/terms" target="_blank" >{{lan.TX_terms}}</a></div>
+      </div>
+    </script>
+
+
+
+
+
+</html>

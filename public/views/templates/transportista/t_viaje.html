@@ -1,0 +1,185 @@
+
+<!-- VIAJE  ============================================================-->
+
+<script id='unidadesT' type='text/ractive'>
+    
+    <div class="row">
+        <div class="small-12 columns emailOptions">
+            <div class="small-12 columns">
+              <div id="alertCont" class="alertCont"></div>
+             </div>
+
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorTransportista" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Transportista</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="transportista" placeholder="TRANSPORTISTA" name="transportista" tabindex="2"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoTransportista"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorCliente" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Cliente</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="cliente" placeholder="CLIENTE" name="cliente" tabindex="1"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCliente"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorChofer" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Chofer</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="chofer" placeholder="CHOFER" name="chofer" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoChofer"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorUnidad" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Unidad</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput upper" id="unidad" placeholder="UNIDAD" name="unidad" tabindex="3"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoUnidad"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorCaja" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Caja</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input  class="ginput" id="caja" placeholder="CAJA" name="caja" type="text" tabindex="4"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCaja" class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorOrigen" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Origen</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="origen" placeholder="ORIGEN" name="origen" tabindex="5"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoOrigen"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorDestino" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Destino</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="destino" placeholder="DESTINO" name="destino" tabindex="6"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoDestino"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorValorD" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Valor declarado</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="valor_declarado" placeholder="VALOR DECLARADO" name="valor_declarado" tabindex="7"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoValorD"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+               
+               <div class="small-12 columns spacebot collapse">
+                <div id="errorVolumen" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Volumen</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="volumen" placeholder="VOLUMEN" name="volumen" tabindex="8"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoVolumen"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorContenido" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Contenido</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="contenido" placeholder="CONTENIDO" name="contenido" tabindex="9"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoContenido"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+                
+                <div class="small-12 columns spacebot collapse">
+                <div id="errorCantidad" class="errDiv"></div>
+                <div class="row inputHolder">
+                  <div class="small-12 medium-3 columns">
+                    <div class="labelInput">Cantidad</div>
+                  </div>
+                  <div class="small-12 medium-7 columns collapse">
+                    <input on-keydown="keydown" class="ginput" id="cantidad" placeholder="CANTIDAD" name="cantidad" tabindex="6"   type="text"  />
+                  </div>  
+                   <div class="small-2 end show-for-medium-up columns collapse">
+                      <div id="icoCantidad"  class="icoInput"><img src="/img/correct.png"></div>
+                   </div>
+                </div>   
+               </div>
+    
+            <div class="small-12 column spacebot spacebot collapse">
+            <div>
+             <div class="small-12 spacetop column center collapse">
+                 <div on-enter="submit" on-click="submit" id="subBt" tabindex="7" class="bt largeC b_green">Guardar</div>
+             </div>
+            </div>
+       </div>
+    </div>
+</script>

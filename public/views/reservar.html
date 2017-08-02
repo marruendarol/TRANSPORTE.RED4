@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Publicación | transporte.red®</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="transporte.red">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="/img/fav.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-tap.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/utilities/utilities.js"></script>
+    <script src="/js/lib/URI.js"></script>
+    <script src="/js/lib/defiant.min.js"></script>
+
+    <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+    <script src="../js/lib/richmarker.js"></script>
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_loginSub.js'></script>
+    <script src='/js/controllers/ctrl_reservar.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='publicacionT' type='text/ractive'>
+<div class="topOverlay"></div>
+
+<div class="minHeader">
+    <div class="row">
+        <div id="header" class="small-12 columns gapTop gapBottom">
+            <div class="small-4 columns collapse">
+                <div  class="hide-for-small-only logoSub"><img on-click="retHome" class="pointer" src="/img/logoApp.png"></div>
+            </div>
+             
+             <div class="small-4 columns collapse gaptop show-for-small-only ">
+                <img on-click="toogleMenu" class="pointer" src="/img/menu.png">
+             </div>
+            <div class="small-4 columns collapse smallHeader show-for-small-only ">
+               
+                <div class="pointer show-for-small-only" style="text-align:center;padding:10px"><img on-click="retHome" src="/img/logoComp.png"></div>
+            </div>
+
+             <div class="small-4 column collapse " id="loginContainer" ></div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+
+      <div class="pContent">
+      
+      <div class="row">
+
+        <div class="small-12 column">
+          
+
+
+            <!-- Descripción Princiapl -->
+            <div class="small-12 column">
+                 <div class="small-12 column gaptop destinoHeader">
+
+
+                     <div class="small-12 tituloPub column gaptop collapse">
+                          <div class="icoCont"></div>{{pubModel.publicacion.info.path}}
+                       </div>  
+
+                      <div class="small-12 medium-8 column tituloPub gaptop">
+
+                        
+
+                        <div class=" column collapse">
+                          <div class="icoCont"><img src="/img/origen.png"></div>{{pubModel.ruta.origenNombre}}
+                       </div>   
+                      <!-- Datos principales ruta --> 
+                      <div class=" column collapse">
+                          <div class="icoCont"><img src="/img/destino.png"></div>{{pubModel.ruta.destinoNombre}}
+                      </div>
+
+
+
+                      </div>
+
+
+
+
+                       <div class="small-12 medium-12 large-4 column collapse">
+
+
+                       <div class="fechasContPub">
+                          <div class="fechaTipoPub selDayPub" on-click=""> 
+                            <div class=" topTipoPub"></div> 
+                            <div class="contMesPub">       
+                              <div class="numDiaPub">{{daysOn.dia}}</div>
+                              <div class="numMesPub">{{daysOn.numDia}}</div>
+                              <div class="descMesPub">{{daysOn.abrMes}}</div>
+                              <div class="descAnoPub">{{daysOn.year}}</div>
+                            </div>
+                          </div>
+
+                          </div>
+
+                    </div>
+
+                    
+
+                   
+                      
+
+
+                      
+
+                       <!-- Precios y extras  --> 
+                       <div class="small-12 column preciosDiv gaptop">
+
+                          {{#if pubModel.publicacion.info.totalDesc>0}}
+                          <div class="pub_descuento_pub">Oferta - {{pubModel.publicacion.info.totalDesc}}%</div>
+                          {{else}}
+                          <div class="pub_empty"></div>
+                      {{/if}}
+
+                      
+                      <!-- Extras _________________________________________________-->
+                       <div class="small-12 column collapse">
+                          
+                          <div class="small-12 medium-6 column">
+                              
+                            
+                          </div>
+
+
+                          <!-- Precio ________________________________________________ -->
+                          <div class="small-12 medium-6 column">
+
+                             
+                            
+                              {{#each pubModel.publicacion.info.carac}}
+                              <div class="small-12 column collapse">
+                                  <div class="incluido"><img class="contratadoIco" src="/img/palwhite.png"> incluido</div>
+                                  <div class="contratadoTxt">{{desc}}</div>
+                              </div>
+                              {{/each}}
+
+                               {{#each pubModel.contratados:num}}
+                              <div class="small-12 column collapse">
+                                  
+                                  <div class="adicional">{{count}} {{unidad}}  <img class="contratadoIco" src="/img/plusIco.png">  {{moneda(total)}}</div>
+
+                                  <div class="contratadoTxt">{{desc}}</div>
+                              </div>
+                              {{/each}}
+
+                              <!-- Action Button -->
+
+                              <div class="pub_totalTxt gaptop column collapse"> {{moneda(pubModel.viaje.costoTotal)}}</div>
+                               <div class="validaHastaPub">MXN /  I.V.A. incluido </div>
+
+                                <div class="btAct green gaptop gapbot right bigBt">reservar</div>
+
+
+                          </div>
+
+                        
+                         
+                     </div>         
+
+                      </div>
+
+                      <!-- ________________________________________________________ -->
+
+
+
+
+                       <!-- Datos publicacion.info  --> 
+                      <div class="preciosDiv small-12 column">
+
+
+                        <div class="small-12 medium-3 column center">
+
+                            <img src="/img/tipo_camion.png">
+                            <div class="avisoTruck">*fotografía de referencia del modelo</div>
+                        </div>
+
+                        <div class="small-12 medium-9 column">
+
+
+                          <table class="caracsT">
+                            <tbody>
+
+                            {{#if pubModel.publicacion.info.path!=undefined}}
+                              <tr>
+                                <td class="tDef">Clasificación</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.path}}</td>
+                              </tr>
+                              {{/if}}
+
+
+                              {{#if pubModel.publicacion.info.marca!=undefined}}
+                              <tr>
+                                <td class="tDef">Marca</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.marca}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.modelo!=undefined}}
+                              <tr>
+                                <td class="tDef">Modelo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.modelo}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.ano!=undefined}}
+                              <tr>
+                                <td class="tDef">Año</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.ano}}</td>
+                              </tr>
+                              {{/if}}
+
+                              
+
+                              {{#if pubModel.publicacion.info.cargaMax!=undefined}}
+                              <tr>
+                                <td class="tDef">Carga máxima</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.cargaMax}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.volmax!=undefined}}
+                              <tr>
+                                <td class="tDef">Volumen máximo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.volmax}}</td>
+                              </tr>
+                              {{/if}}
+
+
+                               {{#if pubModel.publicacion.info.largo!=undefined}}
+                              <tr>
+                                <td class="tDef">Largo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.largo}} m.</td>
+                              </tr>
+                              {{/if}}
+
+
+                              {{#if pubModel.publicacion.info.alto!=undefined}}
+                              <tr>
+                                <td class="tDef">Alto</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.alto}} m.</td>
+                              </tr>
+                              {{/if}}
+
+                               {{#if pubModel.publicacion.info.ancho!=undefined}}
+                              <tr>
+                                <td class="tDef">Ancho</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.ancho}} m.</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.comentarios!=undefined && pubModel.publicacion.info.comentarios!=""}}
+                              <tr>
+                                <td class="tDef">Comentarios</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.comentarios}}</td>
+                              </tr>
+                              {{/if}}
+
+                              
+                           
+                            </tbody>
+                          </table>
+
+                           
+                        </div>
+                      </div>
+
+                      <!-- ________________________________________________________ -->
+
+
+
+                      
+
+
+
+                       <!-- Reputación ____________________________________________ -->
+
+                      <div class="small-12 column gaptop preciosDiv">
+
+
+                        <div class="small-12 medium-3 column center">
+
+                       {{#if pubModel.publicacion.info.logotipo.length>0 && pubModel.publicacion.info.logotipo!=undefined}}
+                        <img class="logo_pub" src="{{pubModel.publicacion.info.logotipo}}">
+                        {{else}}
+                            <img class="logo_pub" src="img/pubDefault.png">
+                        {{/if}}
+
+                           
+                        </div>
+
+
+                     <div class="small-12 medium-9 column">
+
+
+                          <table class="caracsT">
+                            <tbody>
+                              {{#if pubModel.publicacion.info.razonsocial!=undefined}}
+                              <tr>
+                                <td class="tDef">Razón Social</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.razonsocial}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.modelo!=undefined}}
+                              <tr>
+                                <td class="tDef">Servicio</td>
+                                <td class="tDesc"><span class="stars-container stars-50">★★★★★</span></td>
+                              </tr>
+                              {{/if}}
+
+                             
+                              <tr>
+                                <td class="tDef">Precio</td>
+                                <td class="tDesc"><span class="stars-container stars-50">★★★★★</span></td>
+                              </tr>
+                              
+                           
+                              <tr>
+                                <td class="tDef">Servicios Completados</td>
+                                <td class="tDesc">12</td>
+                              </tr>
+                              
+
+                              
+                              <tr>
+                                <td class="tDef">Calificaciones positivas </td>
+                                <td class="tDesc">4</td>
+                              </tr>
+                             
+
+                              
+                           
+                            </tbody>
+                          </table>
+
+                           
+                        </div>
+                         
+                      </div>
+                      <!-- ________________________________________________________ -->
+
+                   
+                  </div>    
+
+            </div>
+
+            <!-- Servicios Adicionales que se puedan contratar-->
+            <div class="small-12 column"></div>
+
+
+             <!-- Detalle del ruta -->
+            <div class="small-12 column"></div>
+
+
+             <!-- Información Transportista -->
+            <div class="small-12 column"></div>
+
+
+            <!-- Garantías -->
+            <div class="small-12 column"></div>
+
+
+          <!-- Otras Publicaciones Similares-->
+            <div class="small-12 column"></div>
+
+
+
+        </div>
+      </div>
+
+      </div>
+     
+
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="/img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+<script id='loginRepT' type='text/ractive'>
+    {{#if data.status=="failed"}}
+    <div on-tap="openRegistro" class="loginCont ">
+        <btGen>Regístrarte</btGen>
+    </div>
+    <div on-tap="openLogin" class="loginCont ">
+        <btGen>Entrar</btGen>
+    </div>
+    {{/if}} {{#if data.status==1}}
+    <div class="loginCont ">
+   
+        <btGen id="loginOptions" class="loginOptions">
+         <div class="checkCont">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    </div>
+
+        Mi cuenta</btGen>
+        <div class="hidden">
+            <div class="opt">
+                <ul class="userOpt nonSel">
+                  {{#each data.seccs}}
+                      {{#if parent==undefined}}
+                      <li class="mainM" on-click="getSecc">{{info.nombre}}</li>
+                      {{/if}}
+
+                      {{#if list==undefined && parent!=undefined}}
+                      <li class="sub" on-click="getSecc"><b>{{info.nombre}}</b></li>
+                      {{/if}}
+
+                   {{/each}} 
+                   
+                   <hr>
+                   <div class="userMenu">{{data.username}} </div>
+                   <li class="cerrarMenu" on-click="cerrarSesion">Cerrar Sesión</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+
+
+<script id='tipoVT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='itemsT' type='text/ractive'>
+    <div class="small-12 medium-12 large-12 column ">
+    <div class="small-12 column itemBusqueda collapse ">
+
+    <!-- Origen - Destino  -->
+    <div class="small-12 column  destinoHeader">
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/origen.png"></div>{{origen}}
+         </div>   
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/destino.png"></div>{{destino}}
+        </div>
+    </div>    
+
+
+     <!-- Info Central  -->
+     <div class="small-12 column ">
+        <div class="small-6 column imgTipo collapse gapTop">
+          <img src="img/ribbon1.png">
+          <img src="img/truck.png">
+        </div>
+
+        <div class="small-6 column  collapse gapTop">
+              
+            <div class="small-12  column collapse">
+                <div class="precioBase">${{precioBase}}</div>
+            </div>
+
+         <!--   <div class="small-12  column collapse">
+                <div class="descuento">- ${{descuento}}</div>
+            </div>
+            -->
+            <div class="small-12  column collapse">
+                <div class="precioOferta">${{precioOferta}}</div>
+                <button class="btAct right gapTop">Ver oferta</button>
+            </div>
+
+        
+         </div>
+
+        
+        
+
+        <div class="small-12 columns gapTop">
+           {{finaliza}}
+        </div>
+
+        <div class="small-12 columns gapTop">
+          {{#each carac:num}}
+             <div class="carac">{{carac[num]}}</div>
+          {{/each}}
+
+        </div>
+
+         
+       
+    </div>
+</div>
+
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+<div id="login">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+                <img src="/img/logologin.png">
+            </div>
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column  gapbot center">
+                <div class="small-12 column socialBt gaptop collapse">
+                    <div onclick="ctrl_login.checkFacebook()" class="faceBt">
+                        <img src="/img/facebook.png">
+                        <div class="socialText">Facebook</div>
+                    </div>
+                </div>
+                <div class="small-12 column socialBt gaptop collapse">
+                    <div on-click="initGoogle" class="gPlusBt">
+                        <img src="/img/gPlus.png">
+                        <div class="socialText">Google </div>
+                    </div>
+                </div>
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="strike">
+                        <span>ó cuenta transporte.red</span>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+                <div class="small-12 column loginContainer gaptop  ">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoEmail" src="/img/user32.png" /></div>
+                        <div class="inputDiv">
+                            <input class="inputEl lowercase" type="text" name="username" placeholder="E-mail">
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 column">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                            <input on-enter="initLog" class="inputEl" type="password" name="password" placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <button on-click="initLog" class="btAct blue btFull gaptop">Entrar</button>
+                    <div class="olvidasteBt right gaptop2">¿Olvidaste tu contraseña?</div>
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            ¿No estas registrado?
+            <btGen>Regístrate</btGen>
+        </div>
+    </div>
+ </div>
+</script>
+
+
+<!-- FOOTER ============================================================-->
+   <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/about" target="_blank" >{{lan.TX_about}}</a></div>
+         <div class="itemFooter"><a href="/privacy" target="_blank" >{{lan.TX_privacy}}</a></div>
+         <div class="itemFooter"><a href="/terms" target="_blank" >{{lan.TX_terms}}</a></div>
+      </div>
+    </script>
+
+
+<!-- MAPA INFO ============================================================-->
+<script id='origenPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/origen.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+<script id='destinoPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/destino.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+
+
+</html>

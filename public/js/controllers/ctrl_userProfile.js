@@ -1,0 +1,1 @@
+$(document).ready(function(){mainC.init(ctrl_up.init),ctrl_user.init(ctrl_up.init)});var ctrl_up={init:function(){ctrl_up.initLoader(),ctrl_promo.init(ctrl_quiniela.init)},promoReturn:function(a){console.log("promo return",a),ctrl_quiniela.init()},initLoader:function(){$("#holder").append("Cargando Datos....")},hideLoader:function(){$("#holder").hide()}};

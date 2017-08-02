@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>transporte.red | Simulador Tarifario</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="teranodo | Data Share">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+
+    <script src="/js/lib/jquery.inputmask.bundle.min.js"></script>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+
+    <script src="/js/utilities/utilities.js"></script>
+
+      <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+    <script src="../js/lib/richmarker.js"></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_tarifas3.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+  <div id="preRenderPin" style="display:none;"></div>
+</body>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='origenPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/origen.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+<script id='destinoPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/destino.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+<!-- SIGNUP T ============================================================-->
+<script id='homeT' type='text/ractive'>
+
+<div class="backHeader">
+    <div class="row">
+
+        <div id="header" class="small-12 columns collapse gapTop">
+
+            <div class="small-8 columns collapse">
+            <div class="logoMain" class="hide-for-small-only"><img src="img/logo1.png"></div>
+            <div class="logoSmall" class="show-for-small-only"><img src="img/logoComp.png"></div>
+            </div>
+
+            
+        </div>
+
+        <div id="busqueda" class="small-12 columns gapTop">
+
+            <h1>Simulador Tarifas</h1>
+            <div class="row">
+                <div class="small-12 medium-12 large-5 columns collapse ">
+                    <div class="inputCont leftCont">
+                    <div class="icoCont"><img src="img/origen.png"></div>
+                    <input  id="iOrigen" on-enter="selOrigen" on-downarrow="selOrigenDown" on-uparrow="selOrigenUp"  on-blur="selOrigen" value="{{strOrigen}}" type="text" class="bInput" placeholder="Ciudad" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad'">
+                    </div>
+                    <div id="resOrigen" class="resOrigen"></div>
+                </div>
+                <div class="small-12 medium-12 large-5  columns collapse">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="img/destino.png"></div>
+                    <input id="iDestino" on-enter="selDestino" on-downarrow="selDestinoDown" on-uparrow="selDestinoUp"  on-blur="selDestino" value="{{strDestino}}" type="text" class="bInput" placeholder="Ciudad" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad'">
+                    </div>
+                    <div id="resDestino" class="resDestino"></div>
+                </div>
+                <!-- <div class="small-12 medium-12 large-3 columns collapse">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="img/calendar.png"></div>
+                    <input type="text" class="bInput" placeholder="Fecha" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Fecha'">
+                    </div>
+                </div> -->
+                <div class="small-12 medium-12 large-2 end  columns collapse">
+                    <div on-click="bRoute" class="buscarBt">{{txtBt}}</div>
+                </div>
+
+
+                 <div class="small-12 medium-12 large-5  columns collapse">
+                      <div class="tipo">
+                          <select value="{{tipoVel_sel}}">
+                                {{#each tipoVel}}
+                                    <option value="{{dataVal}}">{{nombre}}</option>
+                                {{/each}}
+                          </select>
+                      </div>
+                      <div class="tipo">
+                          <select value="{{tipoEje_sel}}">
+                                {{#each ejesExcendentes}}
+                                    <option value="{{dataVal}}">{{nombre}}</option>
+                                {{/each}}
+                          </select>
+                      </div>
+
+                        <div class="tipo">
+                          <select value="{{tipoCam_sel}}">
+                                {{#each tipoCamion}}
+                                    <option value="{{dataVal}}">{{nombre}}</option>
+                                {{/each}}
+                          </select>
+                      </div>
+
+
+                       <div class="tipo">
+                        <label class="rutaCouta"><input type="checkbox" name="cuota" checked='{{calculo.infoVehiculo.rutaTipo}}'>Ruta Ideal por Peaje</label>
+                       </div>
+
+
+                 </div>
+
+              
+            </div>
+
+           
+
+
+    </div>    <!-- END ROW -->
+</div>  <!-- END BACKHEADER -->
+
+
+
+
+<div id="resultados" class="small-12 columns">
+    <div class="row resTarifario">  
+      
+      <div class="small-12 columns " >
+        <h2>Tarifa</h2>
+
+
+        </div>
+        
+      
+      <div class="small-12 columns gapTop">
+              
+              <div class="small-12 medium-6 column">
+                      
+                  <div class="contInfo"> 
+                    <!--<div class="titSecc">Ruta</div> -->
+                      <div class="small-12 column gapTop"><div class="icoCont"><img src="img/origen.png"></div>{{strOrigen}}</div>
+                      <div class="small-12 column gapTop"><div class="icoCont"><img src="img/destino.png"></div>{{strDestino}}</div>
+                      <div class="small-12 column gapTop miniunity">{{calculo.infoRuta.descripcion}}</div>
+                  </div>
+{{#if ready}}
+                  <!-- Unidad -->
+                  <div class="contInfo">
+
+                      <div class="small-12 medium-4 column collapse">
+                          <div class="minitit">Tipo</div>
+                          <div class="minidata">{{tipoVel[tipoVel_sel].nombre}}</div>
+                          <div class="miniunity"></div>
+                      </div>
+
+                       
+
+                      <div class="small-12 medium-4 column collapse">
+                          <div class="minitit">Ejes Excedentes</div>
+                          <div class="minidata">{{ejesExcendentes[tipoEje_sel].nombre}}</div>
+                          <div class="miniunity"></div>
+                      </div>
+
+                      <div class="small-12 medium-4 column collapse">
+                          <div class="minitit">Tipo Sub</div>
+                          <div class="minidata">{{tipoCamion[tipoCam_sel].nombre}}</div>
+                          <div class="miniunity"></div>
+                      </div>
+
+
+                </div>
+
+                  <!-- Gastos Viaje -->
+                  <div class="contInfo">
+
+                      <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Distancia</div>
+                          <div class="minidata">{{distancia(calculo.infoRuta.distanciaTotal)}}</div>
+                          <div class="miniunity">km</div>
+                      </div>
+
+                      <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Tiempo total</div>
+                          <div class="minidata">{{tiempo(calculo.infoRuta.tiempoTotal)}}</div>
+                          <div class="miniunity">hr</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Casetas</div>
+                          <div class="minidata">{{calculo.infoRuta.casetasNo}}</div>
+                          <div class="miniunity">no.</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Casetas total</div>
+                          <div class="minidata">{{moneda(calculo.infoRuta.casetasTotal)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                      <div class="small-12 column separator"></div> 
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Gasolina</div>
+                          <div class="minidata">{{calculo.infoRuta.gasConsumida}}</div>
+                          <div class="miniunity">lt</div>
+                      </div>
+
+                      <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Precio Gasolina</div>
+                          <div class="minidata">{{moneda(calculo.infoRuta.vehiculo.costoltgas)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Rendimiento</div>
+                          <div class="minidata">{{calculo.infoRuta.vehiculo.rendimiento}}</div>
+                          <div class="miniunity">km/lt</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Gasolina total</div>
+                          <div class="minidata">{{moneda(calculo.infoRuta.gasTotal)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                  </div>
+
+
+
+
+                  
+                  <!-- Tipo de Viaje -->
+                <div class="contInfo">
+                  <div class="small-12 column" class="radios">
+                    <label><input type="radio" on-click="ref" name="{{calculo.infoVehiculo.viajeTipo}}" value="0">Ida</label>
+                    <label><input type="radio" on-click="ref" name="{{calculo.infoVehiculo.viajeTipo}}" value="1">Retorno</label>
+                    <label><input type="radio" on-click="ref" name="{{calculo.infoVehiculo.viajeTipo}}" value="2">Redondo</label>
+                  </div>
+
+
+                  <div class="{{#if calculo.infoVehiculo.viajeTipo==1 || calculo.infoVehiculo.viajeTipo==2}}show{{else}}hide{{/if}}">
+                  
+                  <div class="minitit gapTop">Porcentaje costo de regreso </div>
+                  <div class="minidata gapTop"><div class="sliders small-12 column" id="slide3" ></div></div>
+                  <div class="miniunity gapTop">{{calculo.infoVehiculo.perc_regreso }}% </div>
+                 
+                  </div>
+
+                </div>
+
+                  <!-- Gastos Viaje -->
+                  <div class="contInfo">
+
+                      <div class="small-12 medium-6 column ">
+                          <div class="minitit">Tiempo Ruta</div>
+                         <div class="minidata"><input class=" small-12 column" type="text" name="tiempoFlete" value="{{calculo.infoRuta.tiempoTotal}}" ></div>
+                          <div class="miniunity">hr</div>
+                      </div>
+
+                      <div class="small-12 medium-6 column ">
+                          <div class="minitit">Tiempos de Espera y carga</div>
+                          <div class="minidata"><input class=" small-12 column" type="text" name="tiempoFlete" value="{{calculo.variables.tiempoEspera}}" ></div>
+                          <div class="miniunity">hr</div>
+                      </div>
+
+                  </div>
+
+                    <!-- Carga -->
+                  <div class="contInfo">
+
+                      <div class="small-12 medium-12 column ">
+                          <div class="minitit">Toneladas de Carga</div>
+                         <div class="minidata"><input class=" small-12 column" type="text" name="tiempoFlete" value="{{calculo.infoVehiculo.capacidad_total}}" ></div>
+                          <div class="miniunity">tn</div>
+
+                  <div class="minitit gapTop">Porcentaje de ocupación</div>
+                  <div class="minidata gapTop"><div class="sliders small-12 column" id="slide2" ></div></div>
+                  <div class="miniunity gapTop">{{calculo.infoVehiculo.capacidad_usada}}%  - {{Math.round(calculo.infoVehiculo.capacidad_total * (calculo.infoVehiculo.capacidad_usada /100)).toFixed(2)}}</div>
+
+                      </div>
+
+                    
+                  </div>
+
+                  <!-- Costos Fijos -->
+                  <div class="contInfo">
+                      <div class="small-12 medium-12 column ">
+                          <div class="minitit">Costos Fijos</div>
+                         <div class="minidata"><input class=" small-12 column currency" on-keyup="ref" type="text" name="" value="{{calculo.fijos.total_fijos}}" ></div>
+                          <div class="miniunity">mas</div>
+                      </div>
+
+                            <!-- Gastos Viaje -->
+                        <div class="subContInfo">
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Depreciación</div>
+                             <div class="minidata"><input class=" small-12 column currency"  type="text" name="tiempoFlete"  value="{{calculo.fijos.depreciacion}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Gastos financieros</div>
+                              <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.financieros}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                           <div class="small-12 medium-6 column ">
+                              <div class="minitit">Seguros</div>
+                             <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.depreciacion}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Sueldo Chofer</div>
+                              <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.financieros}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                           <div class="small-12 medium-6 column ">
+                              <div class="minitit">Personal Extra</div>
+                             <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.depreciacion}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Impuestos</div>
+                              <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.financieros}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                       </div>
+
+
+                  </div>
+
+                  <!-- Costos Variables -->
+                  <div class="contInfo">
+                      <div class="small-12 medium-12 column ">
+                          <div class="minitit">Costos Variables</div>
+                         <div class="minidata"><input class=" small-12 column currency" on-keyup="ref" type="text" name="tiempoFlete" value="{{calculo.variables.total_variables}}" ></div>
+                          <div class="miniunity">mas</div>
+
+                         
+
+                      </div>
+
+                       <div class="subContInfo">
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Lubricantes</div>
+                             <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete"  value="{{calculo.fijos.depreciacion}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Neumáticos</div>
+                              <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.financieros}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                           <div class="small-12 medium-6 column ">
+                              <div class="minitit">Viáticos</div>
+                             <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.depreciacion}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          <div class="small-12 medium-6 column ">
+                              <div class="minitit">Mantenimiento</div>
+                              <div class="minidata"><input class=" small-12 column currency" type="text" name="tiempoFlete" value="{{calculo.fijos.financieros}}" ></div>
+                              <div class="miniunity">mxn</div>
+                          </div>
+
+                          
+
+                       </div>
+                  </div>
+
+                  <!-- Margen de Ganancia -->
+                
+{{/if}}
+
+
+                  
+              </div>
+
+
+
+              <div class="small-12 medium-6 column gapBottom">
+                  <div id="ubica"></div>
+              </div>    
+
+                <div class="small-12 medium-6 column gapBottom">
+                   <div class="contInfo">
+
+                  <div class="minitit">Margen de Ganancia</div>
+                  <div class="minidata gapTop"><div class="sliders small-12 column" id="slide1" ></div></div>
+                  <div class="miniunity gapTop">{{calculo.parametros.percGanancia}}%</div>
+
+
+
+              
+
+                 </div>
+
+
+                  <!-- Costos Variables -->
+                  <div class="contInfo">
+
+                   <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Gastos</div>
+                          <div class="minidata">{{moneda(calculo.variables.gastos)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+                    
+                      <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Ganancia</div>
+                          <div class="minidata">{{moneda(calculo.variables.ganacia)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+                       
+                      <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Sub Total</div>
+                          <div class="minidata">{{moneda(calculo.variables.subtotal_general)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                       <div class="small-12 medium-3 column collapse">
+                          <div class="minitit">Impuestos</div>
+                          <div class="minidata">{{moneda(calculo.fijos.impuestos)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                     <div class="small-12 medium-12 column gapTop">
+                          <div class="minitit">Total</div>
+                           <div class="totaldata">{{moneda(calculo.variables.total_general)}}</div>
+                          <div class="miniunity">mxn</div>
+                      </div>
+
+                     
+                  </div>
+              </div>    
+
+
+            </div>
+
+
+
+             <h5>transporte.red solo calcula un costo aproximado del viaje basado en los parámetros presentados anteriormente. No nos hacemos responsables de variaciones en costos, este tarifario solo es una herramienta para agilizar el proceso de cotizaciones. </h5>
+
+        </div> <!-- END BUSQUEDA -->
+
+
+</div>
+
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{nombre}}</div><div class="estResTxt"> {{ent_abr}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='destinoResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selDestino" class="{{#if selDestino==num}}selDestino{{/if}}"><div class="munResTxt"><img  src="img/destino.png">{{nombre}}</div><div class="estResTxt"> {{ent_abr}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+
+</script>
+
+
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+
+</script>
+
+<!-- FOOTER ============================================================-->
+   <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/about" target="_blank" >{{lan.TX_about}}</a></div>
+         <div class="itemFooter"><a href="/privacy" target="_blank" >{{lan.TX_privacy}}</a></div>
+         <div class="itemFooter"><a href="/terms" target="_blank" >{{lan.TX_terms}}</a></div>
+      </div>
+    </script>
+
+
+
+
+
+</html>

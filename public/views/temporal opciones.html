@@ -1,0 +1,53 @@
+   <div on-click="toogleOptions" class="mas gapTop">Más opciones <img class="masIco" src="img/flecha1.png"></div>
+
+
+ {{#if toogle}}
+            <div id="opciones"  intro-outro='slide' class="small-12 columns ">
+                <div class="small-12 column collapse">
+                   
+                        <div class="small-6 columns">
+                              <input type="radio" id="tipo1" name="tipo" />
+                              <label for="tipo1"><span></span>Solo ida</label>
+                              <br>
+
+                              <input type="radio" id="tipo2" name="tipo" />
+                              <label for="tipo2"><span></span>Ida y vuelta</label>
+                        </div>
+                     
+                        <div class="small-6 columns">
+                            <input type="checkbox" id="c1" name="cc" />
+                            <label for="c1"><span></span>Viajes Compartidos</label>
+                      </div>
+                </div>
+
+            
+                <div class="row">
+                    <div class="small-12 large-6 columns">
+                        <ul class="listMenu">
+                            <li> <input type="text" class="measureInput" placeholder="Largo cms." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Largo cms.'"></li>
+                            <li><input type="text" class="measureInput" placeholder="Largo cms." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Largo cms.'"></li>
+                            <li><input type="text" class="measureInput" placeholder="Largo cms." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Largo cms.'"></li>
+                        </ul>
+                    </div>
+                    <div class="small-12 large-6 columns">
+                        <ul class="listMenu">
+                            <li>
+                                <input type="checkbox" id="car1" name="cc" />
+                                <label for="car1"><span></span>Requiere refrigeración</label>
+                            <li>
+                                   <input type="checkbox" id="car2" name="cc" />
+                                <label for="car2"><span></span>Material Peligroso</label>
+                            <li>
+                                   <input type="checkbox" id="car3" name="cc" />
+                                <label for="car3"><span></span>Requiere Permisos especiales</label>
+                            <li>
+                                   <input type="checkbox" id="car4" name="cc" />
+                                <label for="car4"><span></span>Excede Dimensiones</label>
+                            <li>
+                                  <input type="checkbox" id="car5" name="cc" />
+                                <label for="car5"><span></span>Otros</label>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+             {{/if}}

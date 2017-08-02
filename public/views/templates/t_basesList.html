@@ -1,0 +1,139 @@
+
+<!-- Bases LIST ============================================================-->
+
+<script id='basesList' type='text/ractive'>
+    <div id="alertCont" class=""></div>
+    <div class="row"></div>
+    <div class="row headerList">
+        <div class="small-12 columns titleView">
+            <div class="headerTitle">Bases
+                <subLabel>({{pageInfo.tc}})</subLabel>
+            </div>
+        </div>
+
+    </div>
+    {{#if !empty}}
+    <div class="filtersBox row">
+        <div id="filterPills" class="filters small-12 medium-12 column ">
+            {{#each pills:num}}
+            <div data-alert id="alertDiv" class="pill small-2 medium-2 column">
+                <div class="pillText">{{value}}</div>
+                <a href="#" on-click="pillClose" class="close">&times;</a>
+            </div>
+            {{/each}}
+        </div>
+        <div class="small-12 column gapbot">
+            <input id="buscador" type="text" on-enter='searchQ' placeholder="Filtrar..." />   
+             <div  id="searchBt" on-click="searchB" class="btAct animate grey  leftSpace"><img src="/img/filter.png"></div>
+
+              {{#if perms.create}}
+            <div on-click="addRecord" class="btAct animate green right"> Agregar Sucursal</div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="row tabCont">
+    <div class="small-12 column">
+        <table id="tb1" class="large-only" cellspacing="0">
+            <thead>
+                <tr>
+                    {{#each tableDef}}
+                    <th class="thTable {{classC}} {{#if pageInfo.si==field}}sortSel{{/if}}" width="{{width}}" on-tap="orderCol">{{name}} {{#if pageInfo.si==field && pageInfo.sd=="1"}}
+                    <i class="fa fa-sort-asc" aria-hidden="true"></i>
+                    <img src="/img/sort-up.png" class="orderIco" aria-hidden="true">
+                    {{/if}} {{#if pageInfo.si==field && pageInfo.sd=="-1"}}
+                    <!--<i class="fa fa-sort-desc" aria-hidden="true"></i> -->
+                    <img src="/img/sort-down.png" class="orderIco" aria-hidden="true">
+                    {{/if}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data:num}}
+                <tr intro-outro="fade:300"> <!--  on-hover="tableHover" -->
+                    {{#if perms.del}}
+                    <td  id="del_{{_id}}" class=" {{tableDef[0].classC}}" >
+
+                    <div id="delDiv_{{_id}}"  on-tap="deleteRecord" > <!-- hidden -->
+                        <img class="delIco" src="/img/wasteB.png">
+                    </div>
+                   
+                    <!--<i class="fa fa-trash" aria-hidden="true"></i>-->
+                    </td>
+                    {{/if}}
+                    <td class=" {{tableDef[1].classC}}" on-tap="rowClick">{{nombre}}</td>
+                    <td class=" {{tableDef[2].classC}}" on-tap="rowClick">{{telefono}}</td>
+                    <td class=" {{tableDef[3].classC}}" on-tap="rowClick">{{direccion[0].formatAddr}}</td>
+                    <td class=" {{tableDef[4].classC}}" on-tap="rowClick"><img src="{{direccion[0].url}}"></td>
+                    
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+       </div> 
+    </div>
+    <div class="row">
+       
+        <div class="paginationDiv">
+        <div class="small-12 column">
+            <select id="rpp" value="{{pageInfo.rpp}}" on-change="rppChange">
+                <option value="10">10 resultados por página</option>
+                <option value="20">20 resultados por página</option>
+                <option value="50">50 resultados por página</option>
+                <option value="100">100 resultados por página</option>
+                <option value="500">500 resultados por página</option>
+                <option value="1000">1000 resultados por página</option>
+            </select>
+
+             <div title="Exportar Vista a Excel / CSV" on-click="exportExcel" class="btAct animate grey  leftSpace"><img src="/img/excel.png"></div>
+        </div>
+            <div class="pagination-centered">
+                <ul class="pagination">
+                    <!--<li class="arrow">&laquo;</li>-->
+                    {{#each pageInfo.pagination:num}}
+                    <li {{#if active}} class="current" {{/if}}>
+                        <a on-click="pageClick" data-page="{{pn}}">{{pn}}</a></li>
+                    {{/each}}
+                    <!--<li class="arrow">&raquo;</li>-->
+                </ul>
+            </div>
+             
+        </div>
+
+   
+
+
+    </div>
+     
+     {{else}}
+            {{#if perms.create}}
+            <div class="headerTitle">Todavía no ha agregado Bases a su empresa
+                <subLabel></subLabel>
+            </div>
+            <div on-click="addRecord" class="btAct animate green right"> Agregar Base</div>
+            {{/if}}
+     {{/if}}
+   
+</script>
+
+
+
+
+
+
+
+<!--  DELETE POP UP -->
+
+<script id='deleteT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">{{desc}}</div>
+    <div class="botCont">
+        <div on-tap="confirm" class="btAct green">Sí</div>
+        <div on-tap="cancel" class="btAct blue">No</div>
+
+    </div>
+</div>
+
+</script>

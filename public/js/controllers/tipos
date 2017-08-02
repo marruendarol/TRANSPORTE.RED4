@@ -1,0 +1,34 @@
+
+{nombre:"Pasajeros", subs : [
+		{nombre: "Autobus"},
+		{nombre: "Camioneta"},
+		{nombre: "Coche"}
+]},
+{nombre: "Carga" , subs: [
+		{nombre: "Caja Seca", subs: [
+			{nombre:"Camioneta 1.5 Ton"},
+			{nombre:"Camioneta 3.5 Ton"},
+			{nombre:"Camioneta 7 Ton"},
+			{nombre:"Rabón"},
+			{nombre:"Torton"},
+			{nombre:"Trailer"},
+			{nombre:"Full"},
+		]},
+		{nombre : "Plataforma / Redilas" , subs: [
+			{nombre:"Camioneta 1.5 Ton"},
+			{nombre:"Camioneta 3.5 Ton"},
+			{nombre:"Camioneta 7 Ton"},
+			{nombre:"Rabón"},
+			{nombre:"Torton"},
+			{nombre:"Trailer"},
+			{nombre:"Full"},}
+		]},
+
+		
+		{nombre : "Especial", subs: [
+			{nombre:"Autotanque"},
+			{nombre:"Grua"},
+			{nombre:"Tolva"},
+			{nombre:"Maquinaria Pesada"},
+		]}
+]}

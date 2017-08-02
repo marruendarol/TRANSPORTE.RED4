@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Confirmar Correo electrónico</title>
+	    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Término y condiciones transporte.red">
+    <meta name="transporte.red" content="notranslate" />
+    <meta name="author" content="RLM">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="transporte.red">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="/img/fav.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/utilities/utilities.js"></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_confirmar.js'></script>
+    
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='completoT' type='text/ractive'>
+<div class="topOverlay"></div>
+
+<div class="minHeader">
+    <div class="row">
+        <div id="header" class="small-12 columns gapTop gapBottom">
+            <div class="small-4 columns collapse">
+                <div  class="hide-for-small-only logoSub"><img on-click="retHome" class="pointer" src="/img/logoApp.png"></div>
+            </div>
+             
+             <div class="small-4 columns collapse gaptop show-for-small-only ">
+                
+             </div>
+            <div class="small-4 columns collapse smallHeader show-for-small-only ">
+               
+                <div class="pointer show-for-small-only" style="text-align:center;padding:10px;padding-bottom: 20px"><img on-click="retHome" src="/img/logoComp.png"></div>
+            </div>
+
+             <div class="small-4 column collapse " id="loginContainer" ></div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+<div class="pContent row botSeparator">
+
+<div class="centerCont">
+<h1>Registro de usuario completo.</h1>
+
+<h2>¡Bienvenido a transporte.red!</h2>
+<p>Tu registro esta completo y puedes comenzar a utlizar tu cuenta.</p>
+
+
+      <button on-click="retHome" class="btAct blue btFull gaptop ">Ir al panel de control</button>
+
+
+      </div>
+     
+</div>
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="/img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='errorT' type='text/ractive'>
+<div class="topOverlay"></div>
+
+<div class="minHeader">
+    <div class="row">
+        <div id="header" class="small-12 columns gapTop gapBottom">
+            <div class="small-4 columns collapse">
+                <div  class="hide-for-small-only logoSub"><img on-click="retHome" class="pointer" src="/img/logoApp.png"></div>
+            </div>
+             
+             <div class="small-4 columns collapse gaptop show-for-small-only ">
+                
+             </div>
+            <div class="small-4 columns collapse smallHeader show-for-small-only ">
+               
+                <div class="pointer show-for-small-only" style="text-align:center;padding:10px;padding-bottom: 20px"><img on-click="retHome" src="/img/logoComp.png"></div>
+            </div>
+
+             <div class="small-4 column collapse " id="loginContainer" ></div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+<div class="pContent row botSeparator">
+
+<div class="centerCont">
+
+
+ <div class="small-12 column  gapbot gaptop center">
+        <img src="/img/emailIco.png">
+</div>
+
+
+<h1>Confirmación de correo</h1>
+
+<h2>Tu usuario o id de registro son incorrectos</h2>
+<p>Favor de verificar </p>
+
+
+      </div>
+     
+
+</div>
+
+       <div class="small-12 columns subfooterHome">
+          <img src="/img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<!-- FOOTER ============================================================-->
+    <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/acercade" target="_blank" >Acerca de</a></div>
+         <div class="itemFooter"><a href="/privacidad" target="_blank" >Privacidad</a></div>
+         <div class="itemFooter"><a href="terminos" target="_blank" >Terminos de uso</a></div>
+      </div>
+    </script>
+
+<!--  ALERT ============================================================-->
+    <script id='alertT' type='text/ractive'>
+       <div data-alert id="alertDiv" class="alert-box {{tipo}}">
+             <div id="msgAlert">{{msg}}</div>
+              <a href="#" class="close">&times;</a>
+        </div>
+    </script>
+
+
+
+
+</html>

@@ -1,0 +1,416 @@
+
+<!-- UNIDADES LIST ============================================================-->
+
+<script id='unidadesList' type='text/ractive'>
+    <div id="alertCont" class=""></div>
+    <div class="row"></div>
+    <div class="row headerList">
+        <div class="small-12 columns titleView">
+            <div class="headerTitle">Empresa / Unidades
+                <subLabel>({{pageInfo.tc}})</subLabel>
+            </div>
+        </div>
+
+    </div>
+    {{#if !empty}}
+    <div class="filtersBox row">
+        <div id="filterPills" class="filters small-12 medium-12 column">
+            {{#each pills:num}}
+            <div data-alert id="alertDiv" class="pill small-2 medium-2 column">
+                <div class="pillText">{{value}}</div>
+                <a href="#" on-click="pillClose" class="close">&times;</a>
+            </div>
+            {{/each}}
+        </div>
+        <div class="small-12 column gapbot">
+            <input id="buscador" type="text" on-enter='searchQ' placeholder="Filtrar..." />   
+             <div  id="searchBt" on-click="searchB" class="btAct animate grey  leftSpace"><img src="/img/filter.png"></div>
+
+              {{#if perms.create}}
+            <div on-click="addRecord" class="btAct animate green right "> Agregar Unidad</div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="row tabCont">
+    <div class="small-12 column">
+        <table id="tb1" class="large-only" cellspacing="0">
+            <thead>
+                <tr>
+                    {{#each tableDef}}
+                    <th class="thTable {{classC}} {{#if pageInfo.si==field}}sortSel{{/if}}" width="{{width}}" on-tap="orderCol">{{name}} {{#if pageInfo.si==field && pageInfo.sd=="1"}}
+                    <i class="fa fa-sort-asc" aria-hidden="true"></i>
+                    <img src="/img/sort-up.png" class="orderIco" aria-hidden="true">
+                    {{/if}} {{#if pageInfo.si==field && pageInfo.sd=="-1"}}
+                    <!--<i class="fa fa-sort-desc" aria-hidden="true"></i> -->
+                    <img src="/img/sort-down.png" class="orderIco" aria-hidden="true">
+                    {{/if}}
+                    </th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each data:num}}
+                <tr intro-outro="fade:100"> <!--  on-hover="tableHover" -->
+                    {{#if perms.del}}
+                    <td  id="del_{{_id}}" class=" {{tableDef[0].classC}}" >
+
+                    <div id="delDiv_{{_id}}"  on-tap="deleteRecord" > <!-- hidden -->
+                        <img class="delIco" src="/img/wasteB.png">
+                    </div>
+                   
+                    <!--<i class="fa fa-trash" aria-hidden="true"></i>-->
+                    </td>
+                    {{/if}}
+                    <td class=" {{tableDef[1].classC}}" on-tap="rowClick"><img src="{{tipoImg}}"></td>
+                    <td class=" {{tableDef[2].classC}}" on-tap="rowClick">{{cCase(marca)}}</td>
+                    <td class=" {{tableDef[3].classC}}" on-tap="rowClick">{{modelo}}</td>
+                    <td class=" {{tableDef[4].classC}}" on-tap="rowClick">{{placas}}</td>
+                    <td class=" {{tableDef[5].classC}}" on-tap="rowClick">{{cCase(sucursalDesc)}}</td>
+                    
+                    
+                    <td class=" {{tableDef[6].classC}}" >
+                            {{#if estatus==0}}
+                             <div  on-click="publicar" class="btAct animate green left " >Publicar</div>
+                            {{/if}}
+
+                            {{#if estatus==1}}
+                                <div intro="fade:100" on-click="verPub" class="btAct animate blue left gapBot" >
+                               <img src="/img/palwhite.png" class="icoBt left">
+                                <div class="left">Ver</div>
+
+                                </div>
+                                <div id="quitar_{{_id}}" on-click="quitarPub" class="btAct animate yellow left gapBot " >Desactivar</div>
+                            {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+       </div> 
+    </div>
+    <div class="row">
+       
+        <div class="paginationDiv">
+        <div class="small-12 column">
+        {{#if pageInfo.tc>10}}
+            <select id="rpp" value="{{pageInfo.rpp}}" on-change="rppChange">
+                <option value="10">10 resultados por página</option>
+                <option value="20">20 resultados por página</option>
+                <option value="50">50 resultados por página</option>
+                <option value="100">100 resultados por página</option>
+                <option value="500">500 resultados por página</option>
+                <option value="1000">1000 resultados por página</option>
+            </select>
+        {{/if}}
+             <div title="Exportar Vista a Excel / CSV" on-click="exportExcel" class="btAct animate grey  leftSpace"><img src="/img/excel.png"></div>
+        </div>
+            <div class="pagination-centered">
+                <ul class="pagination">
+                    <!--<li class="arrow">&laquo;</li>-->
+                    {{#each pageInfo.pagination:num}}
+                    <li {{#if active}} class="current" {{/if}}>
+                        <a on-click="pageClick" data-page="{{pn}}">{{pn}}</a></li>
+                    {{/each}}
+                    <!--<li class="arrow">&raquo;</li>-->
+                </ul>
+            </div>
+             
+        </div>
+
+   
+
+
+    </div>
+     
+     {{else}}
+            {{#if perms.create}}
+            <div class="headerTitle">Todavía no ha agregado unidades a su flotilla
+                <subLabel></subLabel>
+            </div>
+            <div on-click="addRecord" class="btAct animate green right"> Agregar Unidad</div>
+            {{/if}}
+     {{/if}}
+   
+</script>
+
+
+
+
+
+
+
+<!--  DELETE POP UP -->
+
+<script id='deleteT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">¿Borrar unidad?
+    <div class="minitit">Se perderan todos datos de la unidad y sus publicaciones.</div>
+    </div>
+
+    <div class="botCont">
+        <div on-tap="confirm" class="btAct green">Sí</div>
+        <div on-tap="cancel" class="btAct blue">No</div>
+
+    </div>
+</div>
+
+
+</script>
+
+<!--  REMOVER PUBLICACION -->
+<script id='quitarT' type='text/ractive'>
+<div id="quitar">
+<div class="popCont">
+    <div class="popTit">¿Desactivar publicación?
+    <div class="minitit">La unidad ya no estará listada como disponible.</div>
+    </div>
+
+    <div class="botCont">
+        <div on-tap="confirm" class="btAct green">Sí</div>
+        <div on-tap="cancel" class="btAct blue">No</div>
+
+    </div>
+</div>
+</div>
+
+</script>
+
+
+
+<!-- AVISO EDICIÖN -->
+<script id='editarT' type='text/ractive'>
+<div id="editar">
+<div class="popCont">
+    <div class="popTit">Editar
+    <div class="minitit">La unidad no puede ser editada mientras tenga una publicación activa. Para editar desactive la publicación e intente de nuevo</div>
+    </div>
+
+    <div class="botCont">
+        <div on-tap="cancel" class="btAct blue right">Aceptar</div>
+
+    </div>
+</div>
+</div>
+
+</script>
+
+
+
+
+<!-- PUBLICACION DESDE UNIDADES =====================================================fboorrar=======-->
+<script id='publicacionT' type='text/ractive'>
+<div id="publicacion">
+   
+
+</div>
+</script>
+
+
+
+<script id="pubContT" type='text/ractive'>
+ <div class="pubPop">
+
+    <div class="headerTitle">
+        <div class="small-12 medium-8 column collapse"> 
+                <div class="popTitle"><b>Publicar unidad</b> / {{info.marca}} {{info.modelo}} </div>
+                <div class="placa">{{info.placas}}</div>
+          </div>
+
+        <div class="small-12 medium-4 column">
+            <div class="closeModal " on-click="cancel"><img src="/img/cerrar.png"></div>
+        </div>
+    </div>
+
+    <div class="tabsBT">
+        <div on-click="tab1" class="btTab {{#if tab1}}btTabActive{{/if}}"> Publicar la disponibilidad</div>
+        <div on-click="tab2" class="btTab {{#if tab2}}btTabActive{{/if}}">Publicar como regreso vacio</div>
+    </div>
+
+    <div class="small-12 medium-12 column gapbot {{#if !tab1}}hide{{/if}}">
+        <div class="pubInfo" on-click="goUnidades">
+            <div class="titPub">
+                
+                <div class="subPub">
+                    Selecciona los días que tu unidad estará disponible.</div>
+            </div>
+            <div class="pubDet">
+               
+                <div class="pubCont ">
+                    
+                    {{#each data.daysR}}
+                    <div class="recTipoPub {{#if tipo}}selDay{{/if}}" on-click="dayClick">
+                        
+                        <div class="{{#if tipo}}topTipo{{else}}topTipoDisabled{{/if}}"></div>
+
+                        {{#if tipo}}
+                        <div class="checkContPub">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                        </div>
+                        {{else}}
+                           
+
+                        {{/if}}
+
+
+                        <div class="contPub ">
+                             <div class="numDiaPub">{{dia}}</div>
+                            <div class="numMesPub">{{numDia}}</div>
+                            <div class="descMesPub">{{abrMes}}</div>
+                        </div>
+                        
+                    </div>
+                    {{/each}}
+
+
+                    </div>
+
+                    <div class="small-12 column gapBot2">
+                         <div fade-in-out class="small-12  column gapTop gapBot2 percPubCont" >
+                         {{#if info.totalDesc>0}}
+                         <div class="pub_descuento">Oferta - {{info.totalDesc}}%</div>
+                         {{/if}}
+
+                    <div class="minitit gaptop">Si publicas como oferta tus unidades aparecerán en lugar preferencial</div>
+                   <div class="minitit gaptop">Tu utilidad configurada es del <div class="percPub">{{info.percGanancia}}%</div>, para ofertar reducirla a: <div class="percPub">{{info.ofertaPerc}}%</div>
+
+
+                   
+
+
+                   </div>
+                  <div class="minidata gapTop "><div class="sliders small-12 " id="slideOferta" ></div></div>
+
+                   <div class="minitit gaptop">Comentarios adicionales (condiciones especiales o datos importantes)</div>
+                  <textarea class="farea" value="{{info.comentariosPub}}"> </textarea>
+                  
+
+                  </div>
+                 
+
+                   <div on-click="savePublicacion" class="btPublicar animate green gapBot2 gapTop2 ">Publicar</div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="small-12 medium-12 column gapbot {{#if !tab2}}hide{{/if}}">
+        <div class="pubInfo" on-click="goUnidades">
+            <div class="titPub">
+                <div class="subPub">
+                    <div class="subtextoF">Selecciona el periodo en que estará disponible.</div>
+                </div>
+            </div>
+            <div class="pubDet">
+               
+                <div class="pubCont">
+
+
+
+                      <div class="controlsCont">
+                <div class="small-12 medium-6  columns collapse gapBot ">
+                    <div class="inputCont leftCont">
+                    <div class="icoCont"><img src="/img/origen.png"></div>
+                    <input  id="iOrigen" on-enter="selOrigen" on-downarrow="selOrigenDown" on-uparrow="selOrigenUp"  on-blur="selOrigen" value="{{strOrigen}}" type="text" class="bInputPub" placeholder="Ciudad origen" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad origen'">
+                    </div>
+                    <div id="resOrigen" class="resOrigen"></div>
+                </div>
+
+                <div class="small-12 medium-6   columns collapse gapBot">
+                    <div class="inputCont">
+                    <div class="icoCont"><img src="/img/destino.png"></div>
+                    <input id="iDestino" on-enter="selDestino" on-downarrow="selDestinoDown" on-uparrow="selDestinoUp"  on-blur="selDestino" value="{{strDestino}}" type="text" class="bInputPub" placeholder="Ciudad destino" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ciudad destino'">
+                    </div>
+                    <div id="resDestino" class="resDestino"></div>
+                </div>
+
+                </div>
+
+
+                    <div class="small-12 column gapBot2 gapTop2">
+                    
+                    {{#each data.daysR}}
+                    <div class="recTipoPub {{#if tipo}}selDay{{/if}}" on-click="dayClick">
+                        
+                        <div class="{{#if tipo}}topTipo{{else}}topTipoDisabled{{/if}}"></div>
+
+                        {{#if tipo}}
+                        <div class="checkContPub">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                        </div>
+                        {{else}}
+                           
+
+                        {{/if}}
+
+
+                        <div class="contPub ">
+                             <div class="numDiaPub">{{dia}}</div>
+                            <div class="numMesPub">{{numDia}}</div>
+                            <div class="descMesPub">{{abrMes}}</div>
+                        </div>
+                        
+                    </div>
+                    {{/each}}
+
+
+                    </div>
+
+
+                     <div class="small-12 column gapTop2 gapBot2 percPubCont"  >
+                        <div class="timeText centered gapBot">Hora Limite del viaje </div>
+
+                        <div class="small-6 column collapse">
+                            <div class="horaBig">{{pad(info.horasMax)}} : </div>
+                            <div class="timeText right">Hora</div>
+                            <div class="minidata gapTop "><div class="sliders small-12 " id="slideHora" ></div></div>
+                        </div>
+                        <div class="small-6 column ">
+                            <div class="minBig"> {{pad(info.minMax)}}</div>
+                            <div class="timeText left ">Minutos</div>
+                            <div class="minidata gapTop "><div class="sliders small-12 " id="slideMinutos" ></div></div>
+                        </div>
+
+                     </div>
+
+
+                    <div fade-in-out class="small-12 column gapTop2 gapBot2 percPubCont"   >
+                    {{#if info.totalDesc>0}}
+                         <div class="pub_descuento">Oferta - {{info.totalDesc}}%</div>
+                         {{/if}}
+                      <div class="minitit gaptop">Si publicas con menos utilidad tu publicación aparecera como oferta en lugar preferencial</div>     
+                    <div class="minitit gaptop">Tu utilidad configurada es del <div class="percPub">{{info.percGanancia}}%</div>, para ofertar reducirla a: <div class="percPub">{{info.ofertaPerc}}%</div></div>
+                  <div class="minidata gapTop "><div class="sliders small-12 column" id="slideOferta2" ></div></div>
+
+                
+
+                  </div>
+
+
+                    <div class="small-12 column gapBot2"></div>
+
+                   <div on-click="savePublicacion" class="btPublicar animate green gapBot2 gapTop2 ">Publicar</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+</script>

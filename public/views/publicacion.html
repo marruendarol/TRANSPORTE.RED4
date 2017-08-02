@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Publicación | transporte.red®</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="transporte.red">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transporte en México.">
+
+       <meta name="google-signin-client_id" content="485665433046-3v6hok8sfeu0th312tcllsb24apabvld.apps.googleusercontent.com">    
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="/img/fav.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-tap.js"></script>
+    <script src='/js/lib/moment-with-locales.min.js'></script>
+    <script src='/js/lib/es.js'></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+    <script src="/js/utilities/utilities.js"></script>
+    <script src="/js/lib/URI.js"></script>
+    <script src="/js/lib/defiant.min.js"></script>
+      <script src="/js/lib/digitalspaghetti.password.js"></script>
+
+    <script src="/js/lib/jquery.timepicker.min.js"></script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
+      <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+      <script src='/js/controllers/ctrl_mapSelector.js'></script>  <!-- MAP SELECTOR -->
+
+    <script src="../js/lib/richmarker.js"></script>
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_loginSub.js'></script>
+    <script src='/js/controllers/ctrl_publicacion.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+</body>
+
+
+
+<!-- SIGNUP T ============================================================-->
+<script id='publicacionT' type='text/ractive'>
+<div class="topOverlay"></div>
+
+<div class="minHeader">
+    <div class="row">
+        <div id="header" class="small-12 columns gapTop gapBottom">
+            <div class="small-4 columns collapse">
+                <div  class="hide-for-small-only logoSub"><img on-click="retHome" class="pointer" src="/img/logoApp.png"></div>
+            </div>
+             
+             <div class="small-4 columns collapse gaptop show-for-small-only ">
+                <img on-click="toogleMenu" class="pointer" src="/img/menu.png">
+             </div>
+            <div class="small-4 columns collapse smallHeader show-for-small-only ">
+               
+                <div class="pointer show-for-small-only" style="text-align:center;padding:10px"><img on-click="retHome" src="/img/logoComp.png"></div>
+            </div>
+
+             <div class="small-4 column collapse " id="loginContainer" ></div>
+        </div>
+      
+    </div>
+
+</div>
+
+
+
+      <div class="pContent">
+      
+      <div class="row">
+
+        <div class="small-12 column">
+          
+
+
+            <!-- Descripción Princiapl -->
+            <div class="small-12 column">
+                 <div class="small-12 column gaptop destinoHeader">
+
+
+                     <div class="small-12 tituloPub column gaptop collapse">
+                          <div class="icoCont"></div>{{pubModel.publicacion.info.path}}
+                       </div>  
+
+                      <div class="small-12 medium-8 column tituloPub gaptop">
+
+                        
+
+                        <div class=" column collapse">
+                          <div class="icoCont"><img src="/img/origen.png"></div>{{pubModel.ruta.origenNombre}}
+                       </div>   
+                      <!-- Datos principales ruta --> 
+                      <div class=" column collapse">
+                          <div class="icoCont"><img src="/img/destino.png"></div>{{pubModel.ruta.destinoNombre}}
+                      </div>
+
+
+                      
+
+                      <div on-click="masInfo" class="masInfoRuta">
+                        información ruta <img class="icomore rotate {{#if masinfo}}rotateDown{{/if}} " src=/img/closemore.png>
+                    </div>
+
+                      </div>
+
+
+
+
+                       <div class="small-12 medium-12 large-4 column collapse">
+
+                          <div class="validaHastaPub">publicación válida hasta <db>{{validaH(pubModel.publicacion.fechas)}}</db></div>
+
+                       <div class="fechasContPub">
+                          <div class="fechaTipoPub selDayPub" on-click=""> 
+                            <div class=" topTipoPub"></div> 
+                            <div class="contMesPub">       
+                              <div class="numDiaPub">{{daysOn.dia}}</div>
+                              <div class="numMesPub">{{daysOn.numDia}}</div>
+                              <div class="descMesPub">{{daysOn.abrMes}}</div>
+                              <div class="descAnoPub">{{daysOn.year}}</div>
+                            </div>
+                          </div>
+
+                          </div>
+
+                    </div>
+
+                    
+                       {{#if masinfo}}
+                          <div intro-outro='slide' class=" small-12 columns masInfoCont collapse">
+                              <!-- Ruta Info -->
+
+                              <div class="small-12 medium-12 column collapse">
+                               <div class="module">
+                                      <titSpan><span>Ruta Sugerida </span></titSpan>
+                                          <div class="small-12 medium-12 column collapse">
+                                              <div class="minitit">Ruta</div>
+                                              <div class="minidata">{{pubModel.ruta.descripcion}}</div>
+                                              <div class="miniunity">(fuente. STC.)</div>
+                                          </div>
+
+                                         
+                                          <div class="small-12 column separator"></div> 
+
+                                            <div class="small-12 medium-3 column collapse">
+                                              <div class="minitit">Tiempo total</div>
+                                              <div class="minidata">{{tiempo(pubModel.ruta.tiempoTotal)}}</div>
+                                              <div class="miniunity">hr</div>
+                                          </div>
+
+                                           <div class="small-12 medium-3 column collapse">
+                                              <div class="minitit">Casetas</div>
+                                              <div class="minidata">{{pubModel.ruta.casetasNo}}</div>
+                                              <div class="miniunity">no.</div>
+                                          </div>
+
+                                           <div class="small-12 medium-3 column collapse">
+                                              <div class="minitit">Distancia total</div>
+                                              <div class="minidata">{{distancia(pubModel.ruta.distanciaTotal)}}</div>
+                                              <div class="miniunity">km.</div>
+                                          </div>
+
+                                           <div class="small-12 medium-3 column collapse">
+                                              <div class="minitit">Precios Gasolinas</div>
+                                              {{#each pubModel.ruta.gasolinas:num}}
+                                              <div class="minidata">{{pubModel.ruta.gasolinas[num]['tipo-costo']}}</div>
+                                              {{/each}}
+                                              <div class="miniunity">mxn</div>
+                                          </div>
+
+                                      </div>
+                                  </div>
+
+                            
+                              <!-- Mapa -->
+                              <div class="small-12 medium-12 column collapse gapbot2">    
+                                      <div id="ubica"></div>   
+                              </div>
+
+                     {{/if}}
+                      
+
+                       <!-- Precios y extras  --> 
+                       <div class="small-12 column preciosDiv gaptop">
+
+                          {{#if pubModel.publicacion.info.totalDesc>0}}
+                          <div class="pub_descuento_pub">Oferta - {{pubModel.publicacion.info.totalDesc}}%</div>
+                          {{else}}
+                          <div class="pub_empty"></div>
+                      {{/if}}
+
+                          <div class="small-12 column gapbot">
+                                  <div class="costoBtxt">Costo Base:</div>
+                                  <div class="pub_baseTxt"> {{moneda(pubModel.publicacion.costos.granIVA)}}</div>
+                                 <hr> 
+                          </div>
+
+                        
+
+                      <!-- Extras _________________________________________________-->
+                       <div class="small-12 column collapse">
+                          
+                          <div class="small-12 medium-6 column {{#if pubModel.publicacion.info.servicios.length>0}}adicionalesPub{{/if}}">
+                              
+                              {{#if pubModel.publicacion.info.servicios.length>0}}
+                              <div class="label gapbot">Servicios adicionales disponibles:</div>
+                                {{/if}}
+
+                                {{#each pubModel.publicacion.info.servicios:num}}
+                                    <div class="adicionalRow gapbot"  >
+                                        
+                                        <div class=" adicionalDesc"><img style="margin-top: -3px;margin-right: 2px;" src="/img/serv.png"> {{desc}}</div>
+                                        
+                                        <div class="servBox">
+                                         {{moneda(val)}} {{unidad}}</div>
+                                         <div class="controlS ">
+                                            <div class="subS" on-click="subS"></div>
+                                            <div class="addS" on-click="addS"></div>
+                                       </div>
+                                       </div>
+                                       
+
+                                {{/each}}
+
+                          </div>
+
+
+                          <!-- Precio ________________________________________________ -->
+                          <div class="small-12 medium-6 column">
+
+                             
+                            
+                              {{#each pubModel.publicacion.info.carac}}
+                              <div class="small-12 column collapse">
+                                  <div class="incluido"><img class="contratadoIco" src="/img/palwhite.png"> incluido</div>
+                                  <div class="contratadoTxt">{{desc}}</div>
+                              </div>
+                              {{/each}}
+
+                               {{#each pubModel.contratados:num}}
+                              <div class="small-12 column collapse">
+                                  <div class="btQuitar" on-click="removerAdicional"><img class="contratadoClose" src="/img/remover.png"></div>
+                                  <div class="adicional">{{count}} {{unidad}}  <img class="contratadoIco" src="/img/plusIco.png">  {{moneda(total)}}</div>
+
+                                  <div class="contratadoTxt">{{desc}}</div>
+                              </div>
+                              {{/each}}
+
+                              <!-- Action Button -->
+
+                              <div class="pub_totalTxt gaptop column collapse"> {{moneda(pubModel.viaje.costoTotal)}}</div>
+                               <div class="validaHastaPub">MXN /  I.V.A. incluido </div>
+
+                                <div class="btAct green gaptop gapbot right bigBt {{btDis}}" on-click="reservar">{{{txtBt}}}</div>
+
+                                
+
+                          </div>
+
+                        
+                         
+                     </div>         
+
+                      </div>
+
+                      <!-- ________________________________________________________ -->
+
+
+                       <!-- Preguntar disponibilidad _____________________________  -->
+
+                      <div class="small-12 column  preguntasDiv">
+
+
+                      <div id="msgSendTip" class="gapbot"></div>
+
+                        <div class="costoBtxt small-12 column collapse gapbot2">Pregunta al transportista si tienes dudas del envío
+                        <div class="smallLabel">Recuerde respetar las políticas de mensajería y no introducir datos personales o de contacto.</div>
+                        </div>
+
+
+                        
+
+                          {{#if msgs.length>0}}
+                          <div class="small-12 column gapbot2 preguntasCont">
+                         {{#each msgs}}
+
+                          {{#if tipo=="USER" && estatus==0}}
+                            <div class="preguntaDiv gapbot left gapleft "><img class="icoMsg" src="/img/msgUser.png">{{body}}</div>
+                          {{/if}}
+
+
+                           {{#if tipo=="TRANSPORTISTA" && estatus==0}}
+                            <div class="RespuestaDiv gapbot left gapleft2"><img class="icoMsg" src="/img/msgTrans.png">{{body}}<div class="msgTs">{{momentDate(ts)}}</div></div>
+                          {{/if}}
+                       
+
+                         {{/each}}
+                         </div>
+                         {{/if}}
+
+                      <div class="small-12 column">
+                      <div class="preguntaDiv gapbot">Detalles de tu carga / comentarios</div>
+                          <textarea value="{{comentarioCarga}}" rows="1" class="preguntaArea finput"></textarea>    
+                      </div>
+
+
+                      {{#if msgs.length<1}}
+                      <div class="small-12 medium-6 column">
+                      <div class="preguntaDiv gapbot">Lugar de recolección</div>
+
+
+                          {{#each data.direccion}}
+                              <div class="small-12 medium-12 column gapbot addrBox">
+
+                                 <div id="del_{{id}}" class="deleteDetCont gapbot"  > <!-- hidden -->
+                                      <img class="delIco" src="/img/wasteB.png" on-tap="deleteAddr">
+                                  </div>
+
+
+                                  <div class="small-12 medium-12 large-6 column"><img src="{{url}}"></div>
+                                  <div class="small-12 medium-12 large-5 column gaptop">{{formatAddr}}
+                                    {{#if interior!=undefined && interior!=""}}
+                                    <br>
+                                    Interior : {{interior}}
+                                    {{/if}}
+                                  </div>
+
+
+                              </div>
+
+                          {{/each}}
+
+<div id="mapCtrl_{{@key}}" class="mapCtrlDiv">
+
+
+ <div id="" class=" btAct blue right " on-click="addAddr">Agregar Dirección  <img src="/img/map.png"> </div>
+
+
+</div>
+
+    
+                      </div>
+
+                      <div class="small-12 medium-6 column">
+                      <div class="preguntaDiv gapbot">Hora de recolección</div>
+
+                       <div class="small-12 column gapbot2">
+                      {{#each options:op}}
+   
+                            <input id="horaop{{op}}" class="" type="radio" on-click="optionSet" name="{{ophor}}" value="{{val}}">
+                            <label for="horaop{{op}}">{{text}} </label>
+                                  
+                        {{/each}}
+
+                        </div>
+                            {{#if ophor==2}}
+                            <div class="gapleft2 gapright left ">Entre </div>
+                            <input id="horario2" type="text" class="timeinput time ui-timepicker-input left" autocomplete="off">
+                            <div class="gapleft gapright left ">y</div>
+                             <input id="horario3" type="text" class="timeinput time ui-timepicker-input left " autocomplete="off">
+                            {{/if}}
+
+                        
+                      </div>    
+                      
+
+                      {{/if}}
+
+                    
+                      <div class="small-12  column">
+                        <div id="consultar" class="btAct blue gaptop gapbot right bigBt {{btDis}}" on-click="consultar">{{{txtConsultaBt}}}</div>
+                      </div>
+
+                      </div>
+                      <!-- ________________________________________________________ -->
+
+
+
+                       <!-- Datos publicacion.info  --> 
+                      <div class="preciosDiv small-12 column">
+
+
+                        <div class="small-12 medium-3 column center">
+
+                            <img src="/img/tipo_camion.png">
+                            <div class="avisoTruck">*fotografía de referencia del modelo</div>
+                        </div>
+
+                        <div class="small-12 medium-9 column">
+
+
+                          <table class="caracsT">
+                            <tbody>
+
+                            {{#if pubModel.publicacion.info.path!=undefined}}
+                              <tr>
+                                <td class="tDef">Clasificación</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.path}}</td>
+                              </tr>
+                              {{/if}}
+
+
+                              {{#if pubModel.publicacion.info.marca!=undefined}}
+                              <tr>
+                                <td class="tDef">Marca</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.marca}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.modelo!=undefined}}
+                              <tr>
+                                <td class="tDef">Modelo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.modelo}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.ano!=undefined}}
+                              <tr>
+                                <td class="tDef">Año</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.ano}}</td>
+                              </tr>
+                              {{/if}}
+
+                              
+
+                              {{#if pubModel.publicacion.info.cargaMax!=undefined}}
+                              <tr>
+                                <td class="tDef">Carga máxima</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.cargaMax}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.volmax!=undefined}}
+                              <tr>
+                                <td class="tDef">Volumen máximo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.volmax}}</td>
+                              </tr>
+                              {{/if}}
+
+
+                               {{#if pubModel.publicacion.info.largo!=undefined}}
+                              <tr>
+                                <td class="tDef">Largo</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.largo}} m.</td>
+                              </tr>
+                              {{/if}}
+
+
+                              {{#if pubModel.publicacion.info.alto!=undefined}}
+                              <tr>
+                                <td class="tDef">Alto</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.alto}} m.</td>
+                              </tr>
+                              {{/if}}
+
+                               {{#if pubModel.publicacion.info.ancho!=undefined}}
+                              <tr>
+                                <td class="tDef">Ancho</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.ancho}} m.</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.comentarios!=undefined && pubModel.publicacion.info.comentarios!=""}}
+                              <tr>
+                                <td class="tDef">Comentarios</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.comentarios}}</td>
+                              </tr>
+                              {{/if}}
+
+                              
+                           
+                            </tbody>
+                          </table>
+
+                           
+                        </div>
+                      </div>
+
+                      <!-- ________________________________________________________ -->
+
+
+
+                      
+
+
+
+                       <!-- Reputación ____________________________________________ -->
+
+                      <div class="small-12 column gaptop preciosDiv">
+
+
+                        <div class="small-12 medium-3 column center">
+
+                       {{#if pubModel.publicacion.info.logotipo.length>0 && pubModel.publicacion.info.logotipo!=undefined}}
+                        <img class="logo_pub" src="{{pubModel.publicacion.info.logotipo}}">
+                        {{else}}
+                            <img class="logo_pub" src="img/pubDefault.png">
+                        {{/if}}
+
+                           
+                        </div>
+
+
+                     <div class="small-12 medium-9 column">
+
+
+                          <table class="caracsT">
+                            <tbody>
+                              {{#if pubModel.publicacion.info.razonsocial!=undefined}}
+                              <tr>
+                                <td class="tDef">Razón Social</td>
+                                <td class="tDesc">{{pubModel.publicacion.info.razonsocial}}</td>
+                              </tr>
+                              {{/if}}
+
+                              {{#if pubModel.publicacion.info.modelo!=undefined}}
+                              <tr>
+                                <td class="tDef">Servicio</td>
+                                <td class="tDesc"><span class="stars-container stars-50">★★★★★</span></td>
+                              </tr>
+                              {{/if}}
+
+                             
+                              <tr>
+                                <td class="tDef">Precio</td>
+                                <td class="tDesc"><span class="stars-container stars-50">★★★★★</span></td>
+                              </tr>
+                              
+                           
+                              <tr>
+                                <td class="tDef">Servicios Completados</td>
+                                <td class="tDesc">12</td>
+                              </tr>
+                              
+
+                              
+                              <tr>
+                                <td class="tDef">Calificaciones positivas </td>
+                                <td class="tDesc">4</td>
+                              </tr>
+                             
+
+                              
+                           
+                            </tbody>
+                          </table>
+
+                           
+                        </div>
+                         
+                      </div>
+                      <!-- ________________________________________________________ -->
+
+                     
+
+
+                       <!-- Garantías del ruta ____________________________________ -->
+
+                      <div class="small-12 column terminosDiv">
+
+
+                      <div class="small-12 medium-6 large-3 column batchCont">
+                          <img class="batchImg" src="/img/batch1.png">
+                          <div class="batchText">Tu dinero será protejido hasta que la mercancía haya sido entregada</div>
+                      </div>
+
+                      <div class="small-12 medium-6 large-3 column batchCont">
+                          <img class="batchImg" src="/img/batch2.png">
+                          <div class="batchText">Tu envío será rastreado por medio de la aplicación móvil </div>
+                      </div>
+
+                      <div class="small-12 medium-6 large-3 column batchCont">
+                          <img class="batchImg" src="/img/batch3.png">
+                          <div class="batchText">Recibiras actualizaciones de texto y fotografías de tu envío</div>
+                      </div>
+
+                      <div class="small-12 medium-6 large-3 column batchCont">
+                          <img class="batchImg" src="/img/batch4.png">
+                          <div class="batchText">Contarás con asesoría telefónica y en línea de transporte.red®</div>
+                      </div>
+
+                      <div class="small-12 column">
+                          <div class="acuerdosDiv small-12 column">Por favor lea los acuerdos para el límite de responsabilidad de transporte.red®</div>
+
+                        <div class="botsDiv">
+                          <a href="/terminos" target="_blank"><div class="btAcu blue gapbot gapright">Terminos y condiciones de uso</div></a>
+                          <a href="/privacidad" target="_blank"><div class="btAcu blue gapbot gapright">Aviso de Privacidad</div></a>
+                        </div>
+
+
+                      </div>
+                         
+                      </div>
+                      <!-- ________________________________________________________ -->
+
+
+
+                  </div>    
+
+            </div>
+
+            <!-- Servicios Adicionales que se puedan contratar-->
+            <div class="small-12 column"></div>
+
+
+             <!-- Detalle del ruta -->
+            <div class="small-12 column"></div>
+
+
+             <!-- Información Transportista -->
+            <div class="small-12 column"></div>
+
+
+            <!-- Garantías -->
+            <div class="small-12 column"></div>
+
+
+          <!-- Otras Publicaciones Similares-->
+            <div class="small-12 column"></div>
+
+
+
+        </div>
+      </div>
+
+      </div>
+     
+
+
+
+       <div class="small-12 columns subfooterHome">
+          <img src="/img/logoBotMono.png">
+
+      </div>
+
+
+      <div class="small-12 columns footerHome">
+
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">La empresa
+            <li>Contacto</li>
+            <li>Prensa</li>
+            <li>Franquicias</li>
+            <li>Políticas y Términos</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Clientes
+            <li>Preguntas Frecuentes</li>
+            <li>Contacto</li>
+           
+            </ul>
+          </div>
+
+          <div class="small-12 medium-3 columns">
+            <ul class="ulFooter">Transportista
+            <li>Preguntas Frecuentes</li>
+            <li>Acuerdos</li>
+            <li>Franquicias</li>
+            </ul>
+          </div>
+
+        </div>  
+
+      </div>
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+<script id='loginRepT' type='text/ractive'>
+    {{#if data.status=="failed"}}
+    <div on-tap="openRegistro" class="loginCont ">
+        <btGen>Regístrate</btGen>
+    </div>
+    <div on-tap="openLogin" class="loginCont ">
+        <btGen>Iniciar Sesión</btGen>
+    </div>
+    {{/if}} {{#if data.status==1}}
+    <div class="loginCont ">
+   
+        <btGen id="loginOptions" class="loginOptions">
+         <div class="checkCont">
+    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+
+    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    </div>
+
+        Mi cuenta</btGen>
+        <div class="hidden">
+            <div class="opt">
+                <ul class="userOpt nonSel">
+                  {{#each data.seccs}}
+                      {{#if parent==undefined}}
+                      <li class="mainM" on-click="getSecc">{{info.nombre}}</li>
+                      {{/if}}
+
+                      {{#if list==undefined && parent!=undefined}}
+                      <li class="sub" on-click="getSecc"><b>{{info.nombre}}</b></li>
+                      {{/if}}
+
+                   {{/each}} 
+                   
+                   <hr>
+                   <div class="userMenu">{{data.username}} </div>
+                   <li class="cerrarMenu" on-click="cerrarSesion">Cerrar Sesión</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+
+
+<script id='tipoVT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+<!-- Origen Res ============================================================-->
+
+<script id='origenResT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+      {{#each data:num}}
+          <li on-click="selOrigen" class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">{{municipio_nombre}}</div><div class="estResTxt"> {{estado_nombre}}</div></li>   
+      {{/each}}
+      </ul>
+  </div>
+
+
+</script>
+
+<script id='origenEmptyT' type='text/ractive'>
+
+  <div class="small-12 columns collapse">
+   <ul class="placeResUl">
+          <li class="{{#if selOrigen==num}}selOrigen{{/if}}"><div class="munResTxt"><img  src="img/origen.png">Sin Resultados</div><div class="estResTxt"> intente con otra ciudad</div></li>  
+      </ul>
+  </div>
+
+
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='itemsT' type='text/ractive'>
+    <div class="small-12 medium-12 large-12 column ">
+    <div class="small-12 column itemBusqueda collapse ">
+
+    <!-- Origen - Destino  -->
+    <div class="small-12 column  destinoHeader">
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/origen.png"></div>{{origen}}
+         </div>   
+        <div class="small-6 column collapse">
+            <div class="icoCont"><img src="img/destino.png"></div>{{destino}}
+        </div>
+    </div>    
+
+
+     <!-- Info Central  -->
+     <div class="small-12 column ">
+        <div class="small-6 column imgTipo collapse gapTop">
+          <img src="img/ribbon1.png">
+          <img src="img/truck.png">
+        </div>
+
+        <div class="small-6 column  collapse gapTop">
+              
+            <div class="small-12  column collapse">
+                <div class="precioBase">${{precioBase}}</div>
+            </div>
+
+         <!--   <div class="small-12  column collapse">
+                <div class="descuento">- ${{descuento}}</div>
+            </div>
+            -->
+            <div class="small-12  column collapse">
+                <div class="precioOferta">${{precioOferta}}</div>
+                <button class="btAct right gapTop">Ver oferta</button>
+            </div>
+
+        
+         </div>
+
+        
+        
+
+        <div class="small-12 columns gapTop">
+           {{finaliza}}
+        </div>
+
+        <div class="small-12 columns gapTop">
+          {{#each carac:num}}
+             <div class="carac">{{carac[num]}}</div>
+          {{/each}}
+
+        </div>
+
+         
+       
+    </div>
+</div>
+
+</script>
+
+
+<!-- LOGIN T ============================================================-->
+<script id='loginT' type='text/ractive'>
+<div id="login">
+    <div class="modalLogin row">
+
+       <div id="msgInfoTip"></div>
+
+
+        <div class="small-12 column collapse headerPop">
+           
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+                <img src="/img/logologin.png">
+            </div>
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column  gapbot center">
+                <div class="small-12 column socialBt gapTop2 ">
+                    <div id="gSignInWrapper gaptop">
+                      <div id="customBtn2" class="customGPlusSignIn">
+                        <span class="buttonText"><span class="icon"></span>Iniciar sesión con Google</span>
+                      </div>
+                    </div>
+                </div>
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="strike">
+                        <span>ó cuenta transporte.red</span>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+                <div class="small-12 column loginContainer gaptop  ">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoEmail" src="/img/user32.png" /></div>
+                        <div class="inputDiv">
+                            <input class="inputEl lowercase" type="text" name="username" placeholder="E-mail">
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 column">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                            <input on-enter="initLog" class="inputEl" type="password" name="password" placeholder="Contraseña">
+                        </div>
+                    </div>
+                    <button on-click="initLog" class="btAct blue btFull gaptop right">Iniciar Sesión</button>
+                    <div class="olvidasteBt  gapTop2 left">¿Olvidaste tu contraseña?</div>
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            ¿No estas registrado?
+            <btGen on-click="goReg">Regístrate</btGen>
+        </div>
+    </div>
+ </div>
+</script>
+
+
+<!-- REGISTRO ============================================================-->
+<script id='registroT' type='text/ractive'>
+<div id="registro">
+    <div class="modalLogin row">
+        <div class="small-12 column collapse headerPop">
+            <!--<div class="titModal"></div>-->
+           
+        </div>
+
+         <div class="closeModal" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+
+        <div class="small-12 column collapse">
+            <!-- Tabs simuladas ___________________________________________________ -->
+            <div class="small-12 column  gapbot gaptop center">
+               <h2>Selecciona tipo de cuenta:</h2>
+               <h2> <b style="color:#366aa3;">{{tipoCuenta}}</h2>
+            </div>
+
+            <div class="userTipo">
+               <div on-click='@this.set("tipoCuenta", "CLIENTE")' class="btTipo  {{#if tipoCuenta=='CLIENTE'}}selectedTipo{{/if}}  btHalf "><img class="cuentaIco" src="/img/icosMenu/user32.png"><br>Cuenta de Cliente<br><div class="smallDesc">( Contratar servicios )</div></div>
+               <div on-click='@this.set("tipoCuenta", "TRANSPORTISTA")' class="btTipo  {{#if tipoCuenta=='TRANSPORTISTA'}}selectedTipo{{/if}}  btHalf"><img class="cuentaIco" src="/img/icosMenu/unidades.png"><br>Cuenta de Transportista<br><div class="smallDesc">( Proveer servicios )</div></div>
+            </div>
+
+            <div class="small-12 column  gapbot gaptop center">
+               <h2>Crea  tu cuenta con:</h2>
+            </div>
+
+            <!-- Social ___________________________________________________ -->
+            <div class="small-12 column   center">
+                <div class="small-12 column socialBt ">
+                   
+  <div id="gSignInWrapper">
+    <div id="customBtn" class="customGPlusSignIn">
+      <span class="buttonText"><span class="icon"></span>Crear cuenta con Google</span>
+    </div>
+  </div>
+  <div id="name"></div>
+                  
+                </div>
+                <!-- Separator -->
+                <div class="small-12 column">
+                    <div class="strike">
+                        <span><b>ó</b> cuenta transporte.red</span>
+                    </div>
+                </div>
+                <div id="alertLogin"></div>
+                <!-- Tabs end  ________________________________________________________ -->
+                <div class="small-12 column loginContainer gaptop  ">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoEmail" src="/img/user32.png" /></div>
+                        <div class="inputDiv">
+                            <input class="inputEl lowercase" type="text" autocomplete="off" name="username" value="{{username}}" placeholder="E-mail">
+                        </div>
+                    </div>
+                </div>
+                <div class="small-12 column">
+                    <div class="inputAll gaptop">
+                        <div class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                          <input on-blur="validatePassM" on-keydown="keydown"  autocomplete="off" class="inputEl" id="password" placeholder="Contraseña" value="{{password}}" name="password" type="password" />
+                        </div>
+                    </div>
+
+                     <div class="inputAll gaptop">
+                        <div  class="inputIco"><img class="icoPassword" src="/img/key.png" /></div>
+                        <div class="inputDiv">
+                            
+                            <input  value="{{passwordc}}" on-enter="crear" autocomplete="off" class="inputEl" type="password" name="passwordConfirm" placeholder="Confirmar contraseña">
+                        </div>
+                    </div>
+                    <button on-click="crearLocal" class="btAct blue btFull gaptop right">Crear cuenta</button>
+                   
+                </div>
+                <!-- Container End  ________________________________________________________ -->
+            </div>
+        </div>
+        <div class="footerLogin">
+            
+        </div>
+    </div>
+ </div>
+</script>
+
+
+<!-- FOOTER ============================================================-->
+   <script id='footerT' type='text/ractive'>
+      <div class="legalesFoot">
+         <div class="itemFooter"><a href="/about" target="_blank" >{{lan.TX_about}}</a></div>
+         <div class="itemFooter"><a href="/privacy" target="_blank" >{{lan.TX_privacy}}</a></div>
+         <div class="itemFooter"><a href="/terms" target="_blank" >{{lan.TX_terms}}</a></div>
+      </div>
+    </script>
+
+
+<!-- MAPA INFO ============================================================-->
+<script id='origenPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/origen.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+<script id='destinoPin' type='text/ractive'>
+  <div class="allPin">
+    <div class="pin">
+       <div class="icoM"><img src="/img/destino.png"></div>
+    </div>
+    <div class="subTag">{{nombre}}</div>
+  </div>  
+</script>
+
+
+
+<!-- Consulta ============================================================-->
+<script id='consultaT' type='text/ractive'>
+  <div class="container">
+       <div class="preguntaDiv gapbot">Hacer una pregunta al transportista / confirmar disponibilidad</div>
+            <textarea rows="1" class="preguntaArea finput"></textarea>
+            <div class="btAct blue gaptop gapbot  right">hacer pregunta</div>
+       </div>     
+  </div>  
+</script>
+
+
+
+</html>
+
+
+
+
+<!-- LOGIN T ============================================================-->
+<script id='mapaT' type='text/ractive'>
+<canvas id="canvas" style="display:none;">
+</canvas>
+<img  id="output" style="display:none;" />
+<div id="mapa">
+    <div class="mapRow">
+
+
+         <div class="closeModal gaptop" on-click="cancel"><img src="/img/cerrar.png"></div>
+
+        <div class="small-12 medium-12  column">
+            <div class="small-12 column  collapse">
+                <input class="pac-input" id="pac-input_{{id}}" type="text" placeholder="Escribe tu dirección" />
+            </div>
+            <div class="ubica" id="ubica_{{id}}"></div>
+        </div>
+
+        {{#if data.place_id!=undefined}}
+        <div class="small-12 medium-12  column">
+            <label class="gapbot">Dirección</label>
+            <div class="small-12 medium-12 large-12 column gapbot textMap">{{data.formatAddr}}</div>
+            <br>
+            <label class="gapbot">Coordenadas</label>
+            <div class="small-12 medium-12 large-12 column gapbot textMap">{{data.coords[0]}}, {{data.coords[1]}}</div>
+           
+        </div>
+
+        <div class="small-12 column gapbot"><div class="label">Número interior</div>
+         <input class="finput" id="interiorMapa" type="text" name="" value="{{data.interior}}">
+
+
+         <div class="small-12 medium-12 large-12 gapbot2 gaptop2 column">
+                <div id="" class=" btAct blue right  " id="addrSave" on-click="saveAddr">Agregar Dirección <img src="/img/map.png"> </div>
+            </div>
+          {{/if}}
+    </div>
+
+</div>
+</script>
+
+
+<!--  DELETE POP UP -->
+
+<script id='deleteT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">{{desc}}</div>
+    <div class="botCont">
+        <div on-tap="confirm" class="btAct green">Sí</div>
+        <div on-tap="cancel" class="btAct blue">No</div>
+
+    </div>
+</div>
+
+</script>
+
+
+
+<!--  POP UP -->
+
+<script id='popT' type='text/ractive'>
+
+<div class="popCont">
+    <div class="popTit">{{desc}}</div> 
+</div>
+
+</script>

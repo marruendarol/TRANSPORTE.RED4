@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>transporte.red | Unidades</title>
+
+    <!-- METAS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" CONTENT="Red de transportistas en México">
+    <meta name="google" content="notranslate" />
+    <meta name="author" content="ADDO">
+
+     <!--FACEBOOK SHARING TAGS -->
+    <meta property="og:title" content="teranodo | Data Share">
+    <meta property="og:image" content="/img/logocomplete.png">
+    <meta property="og:description" content="Transportistas en México.">
+
+     <!--FAV -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/foundation.css"/>
+    <link rel="stylesheet" href="/css/jquery.qtip.min.css"/> 
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/nouislider.min.css"/>
+
+    <!-- LIBS --> 
+    <script src='/js/lib/jquery.min.js'></script>
+    <script src="/js/lib/foundation.min.js"></script>
+    <script src="/js/lib/qtip/jquery.qtip.min.js"></script>
+    <script src="/js/lib/ractive.min.js"></script>
+    <script src="/js/lib/ractive-events-keys.js"></script>
+    <script src="/js/lib/ractive-transitions-slide.js"></script>
+
+    <script src="/js/lib/jquery.inputmask.bundle.min.js"></script>
+
+    <script src="/js/lib/nouislider.min.js"></script>
+
+
+    <script src="/js/utilities/utilities.js"></script>
+
+      <script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBcrQxNRRRn5djIHjj5fXV7TP8dLz0WqN8'></script>
+
+    <script src="/js/lib/socket.io-1.2.0.js"></script>
+
+    <!-- LANGUAGES -->
+    <script src='/languages/langAll.js'></script>
+
+    <!-- CONTROLLERS -->
+    <script src='/js/controllers/ctrl_main.js'></script>
+    <script src="../js/lib/richmarker.js"></script>
+
+    <!-- USER CONTROLLERS -->
+    <script src='/js/controllers/ctrl_unidades.js'></script>
+</head>
+
+
+
+<body>
+  <div id="progressBar"></div>
+  <div id="avisosBar"></div>
+  <div id="wrapper">
+    <div id="content" class=""></div>
+    <div id="footer"></div>
+  </div>
+  <div id="modal"></div>
+  <div id="qtip-growl-container"></div>
+  <div id="templateLoader"></div>
+  <div id="preRenderPin" style="display:none;"></div>
+</body>
+
+
+
+<!--MAIN ============================================================-->
+<script id='mainT' type='text/ractive'>
+
+<div class="row">
+    {{#each model}}
+      <div class="small-12 medium-6 column">
+      {{#if this.visible==undefined}}
+      <label>{{this.aliasN}}</label>
+      {{#if this.ctrl=="String"}} {{>stringT}} {{/if}}
+      {{#if this.ctrl=="Number"}} {{>numberT}} {{/if}}
+      {{#if this.ctrl=="Date"}}   {{>dateT}}   {{/if}}
+      {{/if}}
+      <div class="err" id="err_{{@key }}"></div>
+      </div>
+    {{/each}}
+    <div class="btAct" on-click="submit">Actualizar</div>
+</div>
+
+</script>
+
+
+<!--STRING ============================================================-->
+<script id='stringT' type='text/ractive'>
+
+  <input on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+<!--NUMBER ============================================================-->
+<script id='numberT' type='text/ractive'>
+
+  <input on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+<!--DATE ============================================================-->
+<script id='dateT' type='text/ractive'>
+
+  <input on-keyup="dataChange" on-blur="blur" type="text" name="" value="{{data[@key]}}">
+
+</script>
+
+
+</html>

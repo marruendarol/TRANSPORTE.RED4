@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Cliomedic | Médico</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+</head>
+
+   <script src='/js/lib/jquery.min.js'></script>
+
+<body>
+
+  <script type="text/javascript">
+    
+  /**********************************************************
+  * USER CONTROLLER
+  ***********************************************************/
+  $(document).ready(function() {
+      ctrl_user.checkSession();
+  });
+
+  var ctrl_user = {
+    userInfo : {},
+    callback : null,
+    rejectConn: function(){
+      var currURL = utils.getURL();
+      window.location = "../?href=" + currURL;
+    },
+    checkSession: function(){
+       $.ajax({
+            type: 'POST',
+            data: {},
+            url: '/user/session',
+            dataType: 'JSON'
+            }).done(function( response ) {
+              console.log(response,"RESPUESTA CORE")
+              if(response.data.username==undefined){
+                window.location="../home"
+              }else{
+                if(response.data.type=="MEDICO"){
+                 window.location = "../uimedico";
+                }
+                if(response.data.type=="PACIENTE"){
+                  window.location = "../uipaciente" ;
+                }
+              }
+            }).fail(function( response ) {
+                
+        }); 
+    }
+  };
+
+  </script>
+
+
+</body>
+</html>
+
+
+
+
+

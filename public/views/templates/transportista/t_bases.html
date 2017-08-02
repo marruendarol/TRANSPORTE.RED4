@@ -1,0 +1,1173 @@
+
+
+ <!--  DATOS GENERALES  ====================================================-->
+  <script id='datosT' type='text/ractive'>
+       <div class="dataCont">
+          <div class="crow">
+
+
+               <div class="small-12 medium-12 large-6 columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Usuario / Correo de Contacto</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="username" placeholder="" tabindex="" value="{{profileData.info.username}}"  type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">ID interno</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="" placeholder=""  value="{{profileData.uid}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+              <div class="small-12 medium-12 large-6 columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Nombre</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="nombre" placeholder="Nombre" tabindex="" value="{{cCase(profileData.info.nombre)}}"  type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">CEDULA</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="cedula" placeholder=""  value="{{profileData.info.cedula}}" tabindex=""  disabled="" type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Apellido Paterno</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="paterno" placeholder="Apellido Paterno"  value="{{cCase(profileData.info.paterno)}}" tabindex=""  disabled="" type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Apellido Materno</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="materno" placeholder="Apellido Materno"  value="{{cCase(profileData.info.materno)}}" tabindex=""  disabled="" type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+               <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Profesión</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="paterno" placeholder=""  value="{{cCase(profileData.info.titulo)}}" tabindex=""  disabled="" type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Sexo</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="materno" placeholder=""  value="{{sexo(profileData.info.genero)}}" tabindex=""  disabled="" type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+
+              <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Estado Civil</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <select on-change="comboChange" class="inputF" id="civilCombo"> 
+                    <option value=""  selected disabled>Selecciona un Estado Civil</option> 
+                    <option value="Soltero" {{selected(profileData.info.edocivil,"Soltero")}}>Soltero</option>
+                    <option value="Casado" {{selected(profileData.info.edocivil,"Casado")}}>Casado</option>
+                    <option value="Divorciado" {{selected(profileData.info.edocivil,"Divorciado")}}>Divorciado</option>
+                  </select>
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Lugar de Residencia</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="residencia" placeholder="Lugar de residencia"  value="{{cCase(profileData.info.residencia)}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+
+              <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Telefono de Contacto</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="telefono" placeholder=""  value="{{profileData.info.telefono}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+
+      <div class="grupo crow">             
+
+        <div class="small-12 medium-12 large-6 column spacebot">
+           <div class="small-3 columns">
+              <div class="labelInput">Especialidades</div>
+            </div>
+          
+          <div class="small-12 medium-12 large-12 column">
+            <div class="row">
+            <div class="small-12 medium-12 large-7 columns collapse">
+            <select class="inputF" id="especialidadCombo">      
+            </select>
+            </div>
+            <div class="small-12 medium-12 large-3 columns">
+             <div on-click="addEspecialidad" class="subbtG orange ">Agregar Especialidad</div>
+             </div>
+             </div>
+
+             <input class="inputC"  type="text" id="especialidad"  value=''  />
+          </div> 
+         
+        </div>
+
+
+           <div class="small-12 medium-12 large-6 column spacebot">
+           <div class="small-12 columns">
+              <div class="labelInput">Sub Especialidades</div>
+            </div>
+          
+          <div class="small-12 medium-12 large-12 column">
+            <div class="row">
+            <div class="small-12 medium-12 large-7 columns collapse">
+            <select class="inputF" id="subEspecialidadCombo">      
+            </select>
+            </div>
+            <div class="small-12 medium-12 large-5 columns">
+             <div on-click="addSubEspecialidad" class="subbtG orange ">Agregar Sub especialidad</div>
+             </div>
+             </div>
+
+             <input class="inputC"  type="text" id="subespecialidad"  value=''  />
+          </div> 
+
+
+          </div>
+
+          </div> <!-- end grupo -->
+
+            <div class="small-12 medium-12 large-6 column spacebot grupo">
+           <div class="small-12 columns">
+              <div class="labelInput">Palabras Clave para búsqueda (máximo 10)</div>
+              <div class="subLabel">Palabras clave para facilitar los resultados al buscar ej. Corazón, Dolor Pecho, Electrocardiogama... </div>
+            </div>
+          
+          <div class="small-12 medium-12 large-12 column">
+            <div class="row">
+            <div class="small-12 medium-12 large-7 columns collapse">
+                <input placeholder="Escriba una palabra clave" class="ginput" type="text" id="tagInput" />
+            </div>
+            <div class="small-12 medium-12 large-4 columns">
+             <div on-click="addTag" class="subbtG orange ">Agregar palabra clave</div>
+             </div>
+             </div>
+
+             <input class="inputC"  type="text" id="tags"  value=''  />
+          </div> 
+ 
+        </div>
+  
+
+
+          </div> 
+
+          <div id="updateProfile" on-click="updateRS"  class="disabled btG orange spaceBt center">Actualizar Datos</div> 
+
+
+      </div>
+      
+  </script>
+
+
+
+
+
+
+ <!--  CONSULTORIOS  ====================================================-->
+<script id='consultoriosContT' type='text/ractive'>
+
+  <div class="subtabs">
+        <div class="subContentBt" id="subContentBt">
+        {{#each consultorios}}
+            <div id="subtabItem_{{id}}" on-click="clickTab" class="leveltabItem"><div class="leveltabText">{{name}}</div></div>
+        {{/each}}
+
+        {{#if consultorios.length<3}}
+        <div id="subtabItem_{{id}}" on-click="addConsultorio" class="subBt"><div class="subBtText">Agregar consultorio</div></div>
+        {{/if}}
+        </div>   
+
+          
+
+        <div id="consultsContent" >
+            {{#each consultorios}}
+                <div class="subtabContItem" id="subtabContItem_{{id}}">
+                  {{>consultorioT}}
+                </div>
+            {{/each}}
+
+        </div>
+    </div>
+
+</script>
+
+
+ <!--  CONSULTORIOS  ====================================================-->
+<script id='consultorioT' type='text/ractive'>
+
+ <div class="dataCont">
+    <div class="crow">
+
+      <div class="small-12 recuadro column">
+
+                 <div class="formTitle">
+      <h3>Generales / <b>{{name}}</b>  /  {{.calle}}  {{.numero}}, {{.ciudad}}, {{.estado}}.</h3>
+  </div>
+
+          <div class="drow">
+
+ 
+            <div class="small-12 medium-12 large-6 column spaceBot">
+
+                 <div class="small-12 columns">
+                    <div class="labelInput">Teléfonos</div>
+                  </div>
+
+
+
+                  <div class="small-12 medium-12 large-12 column">
+                  <div class="row">
+                  <div class="small-12 medium-12 large-7 columns collapse">
+                     <input placeholder="Escriba un teléfono" class="ginput telInput" type="text" id="telInput_{{id}}" />
+                  </div>
+                  <div class="small-12 medium-12 large-4 columns">
+                   <div on-click="addTel" class="subbtG orange ">Agregar Teléfono</div>
+                   </div>
+                   </div>
+
+                  <input class="inputC"  type="text" id="tels_{{id}}" value=''  />
+                
+
+            </div>
+            </div>
+
+             <div class="small-12 medium-12 large-6 column">
+
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Correo electrónico</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="emailConsul_{{id}}" placeholder=""  value="{{.emailConsul}}" tabindex=""   type="text"  />
+
+                </div>  
+              </div>  
+
+
+             </div>
+
+           </div> 
+        </div>
+
+
+        <div class="small-12 recuadro column">
+
+              <div class="formTitle">
+      <h3>Geolocalización</h3>
+  </div>
+
+            <div class="drow">
+
+        
+
+            <div class="small-12 medium-12 large-6 column">
+                 <div class="small-12 column collapse">
+                  <div  id="locate" on-click="locate" class="btG cBoton"></div>
+                  <div class="subLabel">Ingresa tu dirección para tu geolocalización ej. (Cedros 405, Jardines de Morelos, Ecatepec de Morelos, México)</div>
+
+                  </div>
+                  <div class="small-12 column  collapse">
+                        <input class="pac-input"  id="pac-input_{{id}}" type="text" placeholder="Escribe tu dirección, Código Postal ó Ciudad" />
+                  </div>
+                  <div class="ubica" id="ubica_{{id}}" ></div>
+            </div>
+
+             <div class="small-12 medium-12 large-6 column">
+                 <div class="small-12 medium-12 large-12 columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Calle</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="calle_{{id}}" placeholder="" tabindex="" value="{{cCase(.calle)}}"  type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+
+
+             <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Número Exterior</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="numero_{{id}}" placeholder=""  value="{{.numero}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Número Interior / Consultorio</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="interior_{{id}}" placeholder=""  value="{{.interior}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+               <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Colonia</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled  class="ginput" id="colonia_{{id}}" placeholder=""  value="{{.colonia}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Ciudad</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled class="ginput" id="ciudad_{{id}}" placeholder=""  value="{{cCase(.ciudad)}}" tabindex=""  type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Estado</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled  class="ginput" id="estado_{{id}}" placeholder=""  value="{{cCase(.estado)}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+               <div class="small-12 medium-12 large-12  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Codigo Postal</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" disabled  class="ginput" id="cp_{{id}}" placeholder=""  value="{{cCase(.cp)}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+            </div>
+
+            </div>
+
+          
+        </div>
+
+        
+
+
+
+
+        <div class="small-12 recuadro drow column">
+
+            <div class="small-12 column">
+                <div id="horariosConsultorio_{{id}}" class="horariosCont"></div>
+            </div>
+
+        </div>
+
+
+         <div id="updateConsultorio_{{id}}" on-click="updateRS"  class="disabled btG orange spaceBt center">Actualizar Datos</div> 
+
+
+
+    </div>
+ </div>
+    
+</script>
+
+
+<script id='horariosT' type='text/ractive'>
+
+
+
+  <div class="formTitle">
+      <h3>Horarios del Consultorio</h3>
+  </div>
+
+
+<div class="small-12 medium-12 large-6 column">
+
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Intervalo de tiempo entre citas.</div>
+                </div>
+                <div class="small-7 columns collapse">
+                   <input on-keydown="keydown" class="ginput" id="intervalo_{{consultorios.id}}" placeholder=""  value="{{consultorios.intervalo}}" tabindex=""   type="text"  />
+                </div>  
+              </div>  
+
+
+  </div>
+
+
+<div class="parental-controls">
+  <div id="playtime-schedule">
+
+  <div id="preset-list" class="presets">
+  
+<div id="insHorario"> Define los horarios en que tu consultorio estará disponible para brindar servicio por medio del portal.
+Fuera de Horario de el consultorio será visible pero los usuario no podrán agendar citas.
+</div>
+
+  <div id="insHorario"><strong>Consejo:</strong> si mantienes pulsada la tecla CTRL (Windows) o Command (Mac) mientras haces una selección, podrás añadir varias entradas por día. Tu establecimiento aparecera como disponible para agendar cita en los horarios que selecciones.</div>
+
+    <a class="" href="javascript:;" onclick="horariosC.loadPreset('defaultS');" data-tooltip="">
+    Establecer horario predeterminado</a>
+
+
+  <a class="" href="javascript:;" class="reset-schedule" onclick="horariosC.loadPreset('reset')">
+    Limpiar horario</a> 
+ </div>
+
+<div class="drow">
+ <div class="small-12 column">
+
+      <ul class="time-legend">
+                <li class="top-spacer"></li>
+                  <li class="time">
+                      <sup>0</sup>
+                  </li>
+                  <li class="time">
+                      <sup>1</sup>
+                  </li>
+                  <li class="time">
+                      <sup>2</sup>
+                  </li>
+                  <li class="time">
+                      <sup>3</sup>
+                  </li>
+                  <li class="time">
+                      <sup>4</sup>
+                  </li>
+                  <li class="time">
+                      <sup>5</sup>
+                  </li>
+                  <li class="time">
+                      <sup>6</sup>
+                  </li>
+                  <li class="time">
+                      <sup>7</sup>
+                  </li>
+                  <li class="time">
+                      <sup>8</sup>
+                  </li>
+                  <li class="time">
+                      <sup>9</sup>
+                  </li>
+                  <li class="time">
+                      <sup>10</sup>
+                  </li>
+                  <li class="time">
+                      <sup>11</sup>
+                  </li>
+                  <li class="time">
+                      <sup>12</sup>
+                  </li>
+                  <li class="time">
+                      <sup>13</sup>
+                  </li>
+                  <li class="time">
+                      <sup>14</sup>
+                  </li>
+                  <li class="time">
+                      <sup>15</sup>
+                  </li>
+                  <li class="time">
+                      <sup>16</sup>
+                  </li>
+                  <li class="time">
+                      <sup>17</sup>
+                  </li>
+                  <li class="time">
+                      <sup>18</sup>
+                  </li>
+                  <li class="time">
+                      <sup>19</sup>
+                  </li>
+                  <li class="time">
+                      <sup>20</sup>
+                  </li>
+                  <li class="time">
+                      <sup>21</sup>
+                  </li>
+                  <li class="time">
+                      <sup>22</sup>
+                  </li>
+                  <li class="time">
+                      <sup>23</sup>
+                  </li>
+    </ul>
+
+  <ul id="day0" class="day ui-selectable">
+    <li class="day-label">Lunes</li>
+        <li id="day0-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day0-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day0-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day0-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day0-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day0-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day0-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day0-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day0-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day0-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day0-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day0-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day0-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day0-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day0-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day0-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day0-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day0-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day0-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day0-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day0-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day0-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day0-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day0-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day0-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day0-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day0-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day0-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day0-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day0-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day0-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day0-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day0-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day0-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day0-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day0-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day0-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day0-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day0-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day0-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day0-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day0-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day0-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day0-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day0-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day0-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day0-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day0-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day1" class="day ui-selectable">
+    <li class="day-label">Martes</li>
+        <li id="day1-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day1-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day1-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day1-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day1-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day1-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day1-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day1-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day1-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day1-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day1-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day1-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day1-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day1-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day1-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day1-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day1-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day1-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day1-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day1-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day1-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day1-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day1-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day1-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day1-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day1-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day1-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day1-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day1-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day1-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day1-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day1-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day1-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day1-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day1-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day1-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day1-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day1-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day1-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day1-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day1-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day1-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day1-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day1-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day1-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day1-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day1-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day1-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day2" class="day ui-selectable">
+    <li class="day-label">Miércoles</li>
+        <li id="day2-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day2-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day2-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day2-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day2-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day2-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day2-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day2-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day2-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day2-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day2-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day2-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day2-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day2-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day2-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day2-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day2-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day2-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day2-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day2-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day2-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day2-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day2-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day2-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day2-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day2-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day2-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day2-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day2-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day2-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day2-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day2-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day2-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day2-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day2-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day2-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day2-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day2-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day2-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day2-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day2-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day2-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day2-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day2-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day2-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day2-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day2-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day2-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day3" class="day ui-selectable">
+    <li class="day-label">Jueves</li>
+        <li id="day3-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day3-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day3-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day3-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day3-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day3-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day3-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day3-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day3-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day3-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day3-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day3-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day3-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day3-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day3-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day3-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day3-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day3-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day3-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day3-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day3-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day3-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day3-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day3-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day3-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day3-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day3-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day3-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day3-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day3-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day3-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day3-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day3-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day3-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day3-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day3-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day3-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day3-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day3-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day3-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day3-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day3-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day3-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day3-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day3-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day3-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day3-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day3-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day4" class="day ui-selectable">
+    <li class="day-label">Viernes</li>
+        <li id="day4-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day4-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day4-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day4-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day4-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day4-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day4-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day4-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day4-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day4-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day4-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day4-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day4-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day4-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day4-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day4-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day4-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day4-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day4-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day4-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day4-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day4-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day4-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day4-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day4-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day4-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day4-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day4-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day4-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day4-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day4-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day4-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day4-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day4-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day4-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day4-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day4-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day4-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day4-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day4-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day4-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day4-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day4-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day4-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day4-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day4-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day4-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day4-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day5" class="day ui-selectable">
+    <li class="day-label">Sábado</li>
+        <li id="day5-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day5-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day5-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day5-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day5-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day5-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day5-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day5-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day5-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day5-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day5-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day5-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day5-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day5-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day5-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day5-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day5-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day5-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day5-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day5-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day5-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day5-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day5-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day5-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day5-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day5-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day5-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day5-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day5-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day5-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day5-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day5-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day5-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day5-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day5-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day5-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day5-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day5-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day5-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day5-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day5-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day5-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day5-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day5-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day5-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day5-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day5-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day5-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+  <ul id="day6" class="day ui-selectable">
+    <li class="day-label">Domingo</li>
+        <li id="day6-hour0" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0'))"></li>
+        <li id="day6-hour0-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('0.5'))"></li>
+        <li id="day6-hour1" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1'))"></li>
+        <li id="day6-hour1-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('1.5'))"></li>
+        <li id="day6-hour2" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2'))"></li>
+        <li id="day6-hour2-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('2.5'))"></li>
+        <li id="day6-hour3" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3'))"></li>
+        <li id="day6-hour3-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('3.5'))"></li>
+        <li id="day6-hour4" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4'))"></li>
+        <li id="day6-hour4-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('4.5'))"></li>
+        <li id="day6-hour5" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5'))"></li>
+        <li id="day6-hour5-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('5.5'))"></li>
+        <li id="day6-hour6" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6'))"></li>
+        <li id="day6-hour6-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('6.5'))"></li>
+        <li id="day6-hour7" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7'))"></li>
+        <li id="day6-hour7-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('7.5'))"></li>
+        <li id="day6-hour8" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8'))"></li>
+        <li id="day6-hour8-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('8.5'))"></li>
+        <li id="day6-hour9" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9'))"></li>
+        <li id="day6-hour9-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('9.5'))"></li>
+        <li id="day6-hour10" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10'))"></li>
+        <li id="day6-hour10-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('10.5'))"></li>
+        <li id="day6-hour11" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11'))"></li>
+        <li id="day6-hour11-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('11.5'))"></li>
+        <li id="day6-hour12" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12'))"></li>
+        <li id="day6-hour12-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('12.5'))"></li>
+        <li id="day6-hour13" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13'))"></li>
+        <li id="day6-hour13-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('13.5'))"></li>
+        <li id="day6-hour14" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14'))"></li>
+        <li id="day6-hour14-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('14.5'))"></li>
+        <li id="day6-hour15" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15'))"></li>
+        <li id="day6-hour15-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('15.5'))"></li>
+        <li id="day6-hour16" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16'))"></li>
+        <li id="day6-hour16-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('16.5'))"></li>
+        <li id="day6-hour17" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17'))"></li>
+        <li id="day6-hour17-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('17.5'))"></li>
+        <li id="day6-hour18" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18'))"></li>
+        <li id="day6-hour18-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('18.5'))"></li>
+        <li id="day6-hour19" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19'))"></li>
+        <li id="day6-hour19-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('19.5'))"></li>
+        <li id="day6-hour20" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20'))"></li>
+        <li id="day6-hour20-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('20.5'))"></li>
+        <li id="day6-hour21" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21'))"></li>
+        <li id="day6-hour21-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('21.5'))"></li>
+        <li id="day6-hour22" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22'))"></li>
+        <li id="day6-hour22-half" class="hour  ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('22.5'))"></li>
+        <li id="day6-hour23" class="hour ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23'))"></li>
+        <li id="day6-hour23-half" class="hour spacer ui-selectee" onmouseover="Tooltip.show(this, horariosC.convertTime('23.5'))"></li>
+    
+  </ul>
+
+  </div>
+
+
+  <div class="small-12 column">
+
+  <table class="totals">
+                <tr>
+                
+  <td class="day-total">
+    <span id="total-day0">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day1">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day2">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day3">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day4">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day5">0</span> horas
+  </td>
+  <td class="day-total">
+    <span id="total-day6">0</span> horas
+  </td>
+                </tr>
+                <tr>
+                  <td colspan="7" class="final-total">Total: <span id="week-total">0</span> horas</td>
+                </tr>
+              </table>
+
+              <div class="clear"></div>
+
+            </div>
+
+   </div>
+   </div>
+   <!-- Corte --> 
+  </div>
+
+  </script>
+
+
+ <!-- ASISTENTENTES  ====================================================-->
+  <script id='asistentesT' type='text/ractive'>
+       <div class="dataCont">
+          <div class="crow">
+
+
+            <div class="small-12 medium-12 large-6 column spacebot grupo">
+           <div class="small-12 columns">
+              <div class="labelInput">Agregar Asistente</div>
+              <div class="subLabel">Agrega el correo electrónico con el que fue registrado tu asistente, esto permitirá que tenga acceso a tu agenda y mensajería directa con tu cuenta. </div>
+            </div>
+          
+          <div class="small-12 medium-12 large-12 column">
+            <div class="row">
+            <div class="small-12 medium-12 large-7 columns collapse">
+                <input placeholder="Escriba una correo electrónico válido" class="ginput" type="text" id="asistInput" />
+            </div>
+            <div class="small-12 medium-12 large-4 columns">
+             <div on-click="addAsist" class="subbtG orange ">Agregar Asistente</div>
+             </div>
+             </div>
+
+             <input class="inputC"  type="text" id="asist"  value=''  />
+          </div> 
+
+
+
+         
+        </div>
+  
+
+
+          </div> 
+
+          <div id="updateAsist" on-click="updateRS"  class="disabled btG orange spaceBt center">Actualizar Datos</div> 
+
+
+      </div>
+      
+  </script>
+
+
+
+
+
+
+   <!-- METODOS DE PAGO  ====================================================-->
+  <script id='pagosT' type='text/ractive'>
+       <div class="dataCont">
+          <div class="crow">
+
+            <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Tipo de tarjeta</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <select on-change="comboChange" class="inputF" id="tipoCombo"> 
+                    <option value=""  selected disabled>Tipo de Tarjeta</option> 
+                    <option value="Visa" {{selected(profileData.pagos.tipoTarjeta,"Visa")}}>Visa</option>
+                    <option value="MasterCards" {{selected(profileData.pagos.tipoTarjeta,"MasterCard")}}>MasterCard</option>
+                    <option value="American Express" {{selected(profileData.pagos.tipoTarjeta,"American Express")}}>American Express</option>
+                  </select>
+                </div>  
+              </div>   
+             </div>
+
+
+               <div class="small-12 medium-12 large-6 columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Número de Tarjeta</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown"  class="ginput" id="numTarjeta" placeholder="" tabindex="" value="{{profileData.pagos.numTarjeta}}"  type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+             <div class="small-12 medium-12 large-6  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Titular de la Tarjeta</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown" class="ginput" id="titular" placeholder=""  value="{{profileData.pagos.titular}}" tabindex=""   type="text"  />
+                </div>  
+              </div>   
+             </div>
+
+                 <div class="small-6 medium-6 large-3  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Mes de vencimiento</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <select on-change="comboChange" class="inputF" id="mesCombo"> 
+                    <option value=""  selected disabled>Seleccione</option> 
+                    <option value="01" {{selected(profileData.pagos.mes,"01")}}>01</option>
+                    <option value="02" {{selected(profileData.pagos.mes,"02")}}>02</option>
+                    <option value="03" {{selected(profileData.pagos.mes,"03")}}>03</option>
+                    <option value="04" {{selected(profileData.pagos.mes,"04")}}>04</option>
+                    <option value="05" {{selected(profileData.pagos.mes,"05")}}>05</option>
+                    <option value="06" {{selected(profileData.pagos.mes,"06")}}>06</option>
+                    <option value="07" {{selected(profileData.pagos.mes,"07")}}>07</option>
+                    <option value="08" {{selected(profileData.pagos.mes,"08")}}>08</option>
+                    <option value="09" {{selected(profileData.pagos.mes,"09")}}>09</option>
+                    <option value="10" {{selected(profileData.pagos.mes,"10")}}>10</option>
+                    <option value="11" {{selected(profileData.pagos.mes,"11")}}>11</option>
+                    <option value="12" {{selected(profileData.pagos.mes,"12")}}>12</option>
+                    
+                  </select>
+                </div>  
+              </div>   
+             </div>
+
+               <div class="small-6 medium-6 large-3  columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">Año de vencimiento</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <select on-change="comboChange" class="inputF" id="anoCombo"> 
+                    <option value=""  selected disabled>Seleccione</option> 
+                    <option value="2016" {{selected(profileData.pagos.ano,"2016")}}>2016</option>
+                    <option value="2017" {{selected(profileData.pagos.ano,"2017")}}>2017</option>
+                    <option value="2018" {{selected(profileData.pagos.ano,"2018")}}>2018</option>
+                    <option value="2019" {{selected(profileData.pagos.ano,"2019")}}>2019</option>
+                    <option value="2020" {{selected(profileData.pagos.ano,"2020")}}>2020</option>
+                    <option value="2021" {{selected(profileData.pagos.ano,"2021")}}>2021</option>
+                    <option value="2022" {{selected(profileData.pagos.ano,"2022")}}>2022</option>
+                    <option value="2023" {{selected(profileData.pagos.ano,"2023")}}>2023</option>
+                    <option value="2024" {{selected(profileData.pagos.ano,"2024")}}>2024</option>
+                    <option value="2025" {{selected(profileData.pagos.ano,"2025")}}>2025</option>
+                    <option value="2026" {{selected(profileData.pagos.ano,"2026")}}>2026</option>
+                    <option value="2027" {{selected(profileData.pagos.ano,"2027")}}>2027</option>
+                    <option value="2028" {{selected(profileData.pagos.ano,"2028")}}>2028</option>
+                    <option value="2029" {{selected(profileData.pagos.ano,"2029")}}>2029</option>
+                    <option value="2030" {{selected(profileData.pagos.ano,"2030")}}>2030</option>
+                    <option value="2031" {{selected(profileData.pagos.ano,"2031")}}>2031</option>
+                    <option value="2032" {{selected(profileData.pagos.ano,"2032")}}>2032</option>
+                    <option value="2033" {{selected(profileData.pagos.ano,"2033")}}>2033</option>
+                    <option value="2034" {{selected(profileData.pagos.ano,"2034")}}>2034</option>
+                    <option value="2035" {{selected(profileData.pagos.ano,"2035")}}>2035</option>
+                  
+                  </select>
+                </div>  
+              </div>   
+             </div>
+
+
+
+              <div class="small-12 medium-12 large-6 columns spacebot collapse">
+              <div id="errorNombrec" class="errDiv"></div>
+              <div class="row inputHolder">
+                <div class="small-3 columns">
+                  <div class="labelInput">CVV</div>
+                </div>
+                <div class="small-7 columns collapse">
+                  <input on-keydown="keydown"  class="ginput" id="cvv" placeholder="Nombre" tabindex="" value="{{cCase(profileData.pagos.cvv)}}"  type="password"  />
+                </div>  
+              </div>   
+             </div>
+
+
+          </div> 
+
+          <div id="updatePagos" on-click="updateRS"  class="disabled btG orange spaceBt center">Actualizar Datos</div> 
+
+
+      </div>
+      
+  </script>

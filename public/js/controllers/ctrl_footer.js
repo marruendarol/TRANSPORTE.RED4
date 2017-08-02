@@ -1,0 +1,1 @@
+var ctrl_footer={init:function(){}};
